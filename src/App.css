@@ -1,0 +1,32 @@
+.App {
+  /* text-align: center; */
+  display: grid;
+  width: 1000px;
+  /* height: 1000px; */
+  margin:auto;
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 1fr 20%;
+  /* grid-gap: 10px; */
+   /* width: 1000px;
+  height: 1000px;
+  justify-items: center;
+  justify-content: space-between;*/
+  grid-template-areas: 
+    "header header"
+    "profile nav";
+}
+
+.header {
+  grid-area: header;
+background-color: rgb(5, 214, 5);
+}
+
+.nav {
+  grid-area: nav;
+  background-color: #61dafb;
+}
+
+.profile {
+  grid-area: profile;
+  background-color: #144ce7;
+}
