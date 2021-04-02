@@ -1,0 +1,7 @@
+.profile {
+  grid-area: profile;
+  background-color: #144ce7;
+}
+.item {
+  color: brown;
+}
