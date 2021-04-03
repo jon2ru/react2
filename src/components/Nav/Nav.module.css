@@ -3,5 +3,8 @@
   background-color: #6b61fb;
 }
 .item{
-  color: rgb(253, 112, 194);
+  color: rgb(13, 221, 65);
+}
+.item.activ{
+  color: gold;
 }
