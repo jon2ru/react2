@@ -1,5 +1,4 @@
 import classes from"./Nav.module.css";
-console.log(classes);
 const Nav = () => {
   return (
     <nav className={classes.nav}>
