@@ -10,10 +10,12 @@ function App() {
     <div className="App">
       <Header />
       <Nav />
+      <div className="app-content">
       {/* <Profile /> */}
-      {Dialogs}
+      <Dialogs />
+      </div>
     </div>
   );
-}
+};
 
 export default App;

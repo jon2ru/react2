@@ -15,3 +15,7 @@
     "header header"
     "profile nav";
 }
+.app-content{
+  grid-area: profile;
+  background-color: #14e0e7;
+}
