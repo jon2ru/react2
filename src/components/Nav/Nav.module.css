@@ -1,10 +1,15 @@
 .nav {
   grid-area: nav;
   background-color: #6b61fb;
+  padding: 20px; /* отступы*/
 }
-.item{
+.item a {
   color: rgb(13, 221, 65);
+  text-decoration: none; /* подчеркивание ссылок */
 }
-.item.activ{
+.item a.activeLink {
   color: gold;
+}
+.active {
+  color: white;
 }

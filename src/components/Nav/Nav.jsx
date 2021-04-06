@@ -1,12 +1,14 @@
+import { NavLink } from "react-router-dom";
 import classes from"./Nav.module.css";
 const Nav = () => {
   return (
     <nav className={classes.nav}>
       <div className={classes.item}>
-        <a href="/profile">Profile</a>
+        <NavLink to="/profile" activeClassName={classes.activeLink}>Profile</NavLink>
       </div>
       <div className={`${classes.item} ${classes.activ}`} >
-        <a href="/dialogs">Dialogs</a>
+        <NavLink to="/dialogs" activeClassName={classes.activeLink}>Dialogs</NavLink>
+         {/* activeClassName стиль активной ссылки */}
       </div>
       <div className={classes.item}>
         <a>News</a>
