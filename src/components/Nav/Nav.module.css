@@ -10,6 +10,9 @@
 .item a.activeLink {
   color: gold;
 }
-.active {
+a.active {
   color: white;
 }
+/* .item .aert{
+  color: blueviolet;
+} */
