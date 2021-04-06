@@ -3,10 +3,10 @@ const Nav = () => {
   return (
     <nav className={classes.nav}>
       <div className={classes.item}>
-        <a>Profile</a>
+        <a href="/profile">Profile</a>
       </div>
       <div className={`${classes.item} ${classes.activ}`} >
-        <a>Messages</a>
+        <a href="/dialogs">Dialogs</a>
       </div>
       <div className={classes.item}>
         <a>News</a>
