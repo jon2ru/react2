@@ -8,10 +8,12 @@
     
 }
 .dialogsitem .active{
-    color: chocolate;
+    color: deeppink;
 }
 
-.dialog
+.dialog{
+    padding: 10px;
+}
 
 .messages{
     padding: 10px;  
