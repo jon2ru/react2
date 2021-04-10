@@ -1,8 +1,8 @@
 import Dialogitem from "./Dialogitem/Dialogitem";
 import classes from "./Dialogs.module.css";
 import Messages from "./Messages/Messages";
-<Dialogitem />
-<Messages />
+{/* <Dialogitem />
+<Messages /> */}
 const Dialogs = (props) => {
   let dialogs2 = [
     { id: 1, name: "Dimich" },
@@ -18,7 +18,8 @@ const Dialogs = (props) => {
   let dialogsElements = dialogs2.map((d) => 
     <Dialogitem name={d.name} id={d.id} />
   );
-  let messageElements = messages2.map((m) => <Messages message={m.message} />);
+  let messageElements = messages2.map((m) => 
+  <Messages message={m.message} />);
 
   return (
     <div className={classes.dialogs}>

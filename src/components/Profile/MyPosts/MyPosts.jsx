@@ -1,12 +1,8 @@
 import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
 // console.log(MyPosts);
-const MyPosts = () => {
-  let post = [
-    { id: 1, message: "Как дела", count: 2 },
-    { id: 2, message: "нормально", count: 5 },
-  ];
-  let postElement = post.map((p) => (
+const MyPosts = (props) => {
+  let postElement = props.post.map((p) => (
     <Post message={p.message} count={p.count} />
   ));
   return (
@@ -20,9 +16,7 @@ const MyPosts = () => {
           <button>Add post</button>
         </div>
       </div>
-      <div className={classes.newpost}>
-      {postElement}
-      </div>
+      <div className={classes.newpost}>{postElement}</div>
     </div>
   );
 };

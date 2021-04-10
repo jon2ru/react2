@@ -4,9 +4,13 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+let post = [
+  {id:1, message: "Как дела", count: 2 },
+  { id: 2, message: "нормально", count: 5 },
+];
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App post={post}/>
   </React.StrictMode>,
   document.getElementById("root")
 );
