@@ -14,7 +14,7 @@ function App(props) {
       <Nav />
       <div className="app-content">
         <Route />
-      <Route path='/dialogs/' render={ () =><Dialogs />} />
+      <Route path='/dialogs/' render={ () =><Dialogs dialogs2={props.dialogs2} messages2={props.messages2}/>} />
       <Route path='/profile/' render={ () =><Profile post={props.post}/>} />
       
       </div>

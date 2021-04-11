@@ -8,9 +8,20 @@ let post = [
   {id:1, message: "Как дела", count: 2 },
   { id: 2, message: "нормально", count: 5 },
 ];
+let dialogs2 = [
+  { id: 1, name: "Dimich" },
+  { id: 2, name: "Roma" },
+  { id: 3, name: "Petiya" },
+  { id: 4, name: "Igor" },
+];
+let messages2 = [
+  { id: 1, message: "привет" },
+  { id: 2, message: "позвони мне" },
+  { id: 3, message: "напиши номер" },
+];
 ReactDOM.render(
   <React.StrictMode>
-    <App post={post}/>
+    <App post={post} dialogs2={dialogs2} messages2={messages2}/>
   </React.StrictMode>,
   document.getElementById("root")
 );
