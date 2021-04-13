@@ -8,7 +8,6 @@ const Dialogs = (props) => {
   let messageElements = props.messages2.map((m) => (
     <Messages message={m.message} />
   ));
-
   return (
     <div className={classes.dialogs}>
       <div className={classes.dialogsitem}>{dialogsElements}</div>
