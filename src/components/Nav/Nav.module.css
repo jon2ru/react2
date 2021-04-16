@@ -16,3 +16,12 @@ a.active {
 /* .item .aert{
   color: blueviolet;
 } */
+.navitem img{
+  width: 20px;
+  height: 20px;
+  border-radius: 30px;
+}
+.friends {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}

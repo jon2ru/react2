@@ -5,13 +5,14 @@ import Nav from "./components/Nav/Nav";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
-
 function App(props) {
   return (
     <BrowserRouter>
     <div className="App">
       <Header />
-      <Nav />
+      <Nav friends={props.stateaa.dialogPages.dialogs2} 
+      sideavata={props.stateaa.sidebar}/>
+      
       <div className="app-content">
         <Route />
       <Route path='/dialogs/' render={ () =><Dialogs
