@@ -25,3 +25,12 @@ a.active {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
+.nu{
+  padding: 10px;
+}
+.mnu{
+  padding: 10px;
+}
+.pnu{
+  padding: 10px;
+}

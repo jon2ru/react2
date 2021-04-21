@@ -4,8 +4,11 @@ const Navitem = (props) => {
  
   return (
     <div className={classes.friends}>
-      {props.name}
-      {props.foto} 
+     <div className={classes.nu}>{props.name}{props.foto}</div>
+      {/* <div className={classes.mnu}>{props.name}{props.foto}</div>
+     <div className={classes.pnu}>{props.name}{props.foto}</div>
+      */}
+     
     </div>
   );
 };
