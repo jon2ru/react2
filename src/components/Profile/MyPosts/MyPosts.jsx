@@ -7,10 +7,11 @@ const MyPosts = (props) => {
   let postElement = props.post.map((p) => (
     <Post message={p.message} count={p.count} />
   ));
-  let newPostElement = React.createRef(); /*реакт создай ссылку*/
+  let newPostElement = React.createRef(); /* 31 реакт создай ссылку*/
   let addPost = () =>{
   let newtext = newPostElement.current.value;
-  alert (newtext);
+  props.addPost (newtext);//31,32
+  newPostElement.current.value='';
   };
   return (
     <div className={classes.post}>

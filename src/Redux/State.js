@@ -1,3 +1,5 @@
+import { rerenderEntireTree } from "../Render";
+
 let state = {
   profilePage: {
     post: [
@@ -43,9 +45,33 @@ let state = {
       { id: 3, message: "напиши номер" },
     ],
   },
-  sidebar: [{ img2: <img src="https://i0.wp.com/andrey-eltsov.ru/wp-content/uploads/2018/02/SmailikSbor3.jpg" /> },
-   { img2:<img src="https://i0.wp.com/andrey-eltsov.ru/wp-content/uploads/2018/02/SmailikSbor3.jpg" /> },
-   { img2:<img src="https://i0.wp.com/andrey-eltsov.ru/wp-content/uploads/2018/02/SmailikSbor3.jpg" /> }]
+  sidebar: [
+    {
+      img2: (
+        <img src="https://i0.wp.com/andrey-eltsov.ru/wp-content/uploads/2018/02/SmailikSbor3.jpg" />
+      ),
+    },
+    {
+      img2: (
+        <img src="https://i0.wp.com/andrey-eltsov.ru/wp-content/uploads/2018/02/SmailikSbor3.jpg" />
+      ),
+    },
+    {
+      img2: (
+        <img src="https://i0.wp.com/andrey-eltsov.ru/wp-content/uploads/2018/02/SmailikSbor3.jpg" />
+      ),
+    },
+  ],
 };
 // <img src="https://i0.wp.com/andrey-eltsov.ru/wp-content/uploads/2018/02/SmailikSbor3.jpg" />
+export let addPost = (postMessage) => {
+  let newPost = {
+    id: 3,
+    message: postMessage,
+    count: 0,
+  };
+  state.profilePage.post.push(newPost); /* урок 32 */
+  rerenderEntireTree(state);/* урок 33 отрисовываю заново */
+};
+
 export default state;
