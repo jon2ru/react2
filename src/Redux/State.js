@@ -6,6 +6,7 @@ let state = {
       { id: 1, message: "Как дела", count: 2 },
       { id: 2, message: "нормально", count: 5 },
     ],
+    newPostText: "ww",
   },
   dialogPages: {
     dialogs2: [
@@ -64,14 +65,22 @@ let state = {
   ],
 };
 // <img src="https://i0.wp.com/andrey-eltsov.ru/wp-content/uploads/2018/02/SmailikSbor3.jpg" />
-export let addPost = (postMessage) => {
+export let addPost = () => {
   let newPost = {
     id: 3,
-    message: postMessage,
+    message: state.profilePage.newPostText,
+    //message -получаю значение напрямую из state
     count: 0,
   };
   state.profilePage.post.push(newPost); /* урок 32 */
-  rerenderEntireTree(state);/* урок 33 отрисовываю заново */
+  state.profilePage.newPostText ='';// стираю текст в textarea
+  rerenderEntireTree(state); /* урок 33 отрисовываю заново */
+};
+export let updatenewPost = (newText) => {
+  /*функция для побуквенной 
+  отрисовки при изменении в ul */
+  state.profilePage.newPostText = newText; /* урок 34 */
+  rerenderEntireTree(state); /* урок 33 отрисовываю заново */
 };
 
 export default state;

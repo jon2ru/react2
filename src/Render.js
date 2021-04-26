@@ -3,13 +3,14 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import {addPost} from "./Redux/State" /* урок 32 экспорт не по дефолту */
+import {addPost, updatenewPost} from "./Redux/State" /* урок 32 экспорт не по дефолту */
 
 
 export let rerenderEntireTree = (state) => {
   ReactDOM.render(
     <React.StrictMode>
-      <App stateaa={state} addPost={addPost} />
+      <App stateaa={state} addPost={addPost} 
+      updatenewPost={updatenewPost} />
     </React.StrictMode>,
     document.getElementById("root")
   );/* урок 33 отрисовываю заново */

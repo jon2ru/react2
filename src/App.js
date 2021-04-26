@@ -19,8 +19,10 @@ function App(props) {
        dialogs2={props.stateaa.dialogPages.dialogs2}
         messages2={props.stateaa.dialogPages.messages2}/>} />
       <Route path='/profile/' render={ () =><Profile
-       post={props.stateaa.profilePage.post} 
-       addPost={props.addPost}/>} />
+       post1={props.stateaa.profilePage} 
+       addPost2={props.addPost}
+       updatenewPost3={props.updatenewPost}/>} />
+     {/* поигрался переименовал в post1 and addPost2 */}
       
       </div>
     </div>
