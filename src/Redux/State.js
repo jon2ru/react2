@@ -40,6 +40,7 @@ let state = {
         ),
       },
     ],
+    newDialog: "ee",
     messages2: [
       { id: 1, message: "привет" },
       { id: 2, message: "позвони мне" },
@@ -73,14 +74,32 @@ export let addPost = () => {
     count: 0,
   };
   state.profilePage.post.push(newPost); /* урок 32 */
-  state.profilePage.newPostText ='';// стираю текст в textarea
+  state.profilePage.newPostText = ""; // стираю текст в textarea
   rerenderEntireTree(state); /* урок 33 отрисовываю заново */
 };
 export let updatenewPost = (newText) => {
   /*функция для побуквенной 
   отрисовки при изменении в ul */
-  state.profilePage.newPostText = newText; /* урок 34 */
+  state.profilePage.newPostText = newText; /* урок 34 
+  тут запись текста в state*/
   rerenderEntireTree(state); /* урок 33 отрисовываю заново */
+};
+
+export let addNewDialog = () => {
+  let neewDialog7 = {
+    id: 5,
+    nname: state.dialogPages.newDialog,
+    avatar: (
+<img src="http://pngimg.com/uploads/spongebob/spongebob_PNG8.png" />
+    ),
+  };
+  state.dialogPages.dialogs2.push(neewDialog7); /* урок 32 */
+  state.dialogPages.newDialog = ""; // стираю текст в textarea
+  rerenderEntireTree(state); /* урок 33 отрисовываю заново */
+};
+export let updateDialogs = (newDialogsNew) => {
+  state.dialogPages.newDialog = newDialogsNew; //получаю побуквенно из state.js
+  rerenderEntireTree(state);
 };
 
 export default state;

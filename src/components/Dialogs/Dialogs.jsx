@@ -11,8 +11,12 @@ const Dialogs = (props) => {
   ));
   let newDialogElement = React.createRef();
   let addDialog = () => {
-    let dialogx = newDialogElement.current.value;
-    alert(dialogx);
+    props.addNewDialog();//вызываю функцию
+  };
+  let onDialogChange = () => {
+    let dialogyy = newDialogElement.current.value;
+    props.updateDialogs(dialogyy);
+    //передаю в state.js данные
   };
   return (
     <div className={classes.dialogs}>
@@ -20,10 +24,14 @@ const Dialogs = (props) => {
       <div className={classes.dialog}>{messageElements}</div>
       <div className={classes.dialogsitem}>
         <div>
-          <textarea ref={newDialogElement}></textarea>
+          <textarea
+            onChange={onDialogChange}
+            ref={newDialogElement}
+            value={props.newDialog}
+          />
         </div>
         <div>
-          <button onClick={addDialog}>Add post</button>
+          <button onClick={addDialog}>Add dialog</button>
         </div>
       </div>
     </div>
