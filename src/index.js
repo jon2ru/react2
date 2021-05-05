@@ -1,11 +1,26 @@
 import "./index.css";
-import { rerenderEntireTree } from "./Render";
-
+import store from "./Redux/State";
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import state from "./Redux/State";
-import { addPost } from "./Redux/State"; /* урок 32 экспорт не по дефолту */
 
-rerenderEntireTree(state); /* урок 33 отрисовываю заново */
+let rerenderEntireTree = (state) => {
+  ReactDOM.render(
+    <React.StrictMode>
+      <App
+        stateaa={state}
+        addPost={store.addPost.bind(store)}
+        updatenewPost={store.updatenewPost.bind(store)}
+        updateDialogs={store.updateDialogs.bind(store)}
+        addNewDialog={store.addNewDialog.bind(store)}
+      />
+    </React.StrictMode>,
+    document.getElementById("root")
+  ); 
+};
+rerenderEntireTree(store.getState()); /* урок 33 отрисовываю тут */
+store.subscribe(rerenderEntireTree);
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
