@@ -2,6 +2,8 @@ import Dialogitem from "./Dialogitem/Dialogitem";
 import classes from "./Dialogs.module.css";
 import Messages from "./Messages/Messages";
 import React from "react";
+import { addDialogActionCreator, onDialogChangeActionCreator } from '../../Redux/State';
+
 const Dialogs = (props) => {
   let dialogsElements = props.dialogs2.map((d) => (
     <Dialogitem name={d.nname} id={d.id} avatar={d.avatar} />
@@ -11,11 +13,11 @@ const Dialogs = (props) => {
   ));
   let newDialogElement = React.createRef();
   let addDialog = () => {
-    props.dispatch({type:'ADD-NEW-DIALOG'});//вызываю функцию
+    props.dispatch(addDialogActionCreator());//вызываю функцию
   };
   let onDialogChange = () => {
     let dialogyy = newDialogElement.current.value;
-    props.dispatch({type:'UPDATE-DIALOGS',newDialogsNew:dialogyy});
+    props.dispatch(onDialogChangeActionCreator(dialogyy));
     //передаю в state.js данные
   };
   return (

@@ -2,6 +2,8 @@ import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import React from "react";
 // console.log(MyPosts);
+import { addhhPostActionCreator, onPostChangeActionCreator } from '../../../Redux/State';
+
 const MyPosts = (props) => {
 
   let postElement = props.post.map((p) => (
@@ -10,14 +12,14 @@ const MyPosts = (props) => {
   let newPostElement = React.createRef(); /* 31 реакт создай ссылку*/
   let addhhPost = () =>{
   // let newtext = newPostElement.current.value; -перенес в state
-  props.dispatch({type:'ADD-POST'});/*31,32 вызываю функцию? addPost
+  props.dispatch(addhhPostActionCreator());/*31,32 вызываю функцию? addPost
     в state.js */
     /* props.updatenewPost('');обнуляю значение в textarea 
     -перенес в state.js */
   };
   let onPostChange =()=>{
     let newtext5 = newPostElement.current.value;
-    let action={type:'UPDATE-NEW-POST-TEXT',newText:newtext5}
+    let action=(onPostChangeActionCreator(newtext5))
     //создал action для примера чтобы видеть процесс
     props.dispatch(action);
     //при изменении в textarea передаю данные в state.js
