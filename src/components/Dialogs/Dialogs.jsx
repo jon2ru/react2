@@ -11,11 +11,11 @@ const Dialogs = (props) => {
   ));
   let newDialogElement = React.createRef();
   let addDialog = () => {
-    props.addNewDialog();//вызываю функцию
+    props.dispatch({type:'ADD-NEW-DIALOG'});//вызываю функцию
   };
   let onDialogChange = () => {
     let dialogyy = newDialogElement.current.value;
-    props.updateDialogs(dialogyy);
+    props.dispatch({type:'UPDATE-DIALOGS',newDialogsNew:dialogyy});
     //передаю в state.js данные
   };
   return (

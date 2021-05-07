@@ -10,10 +10,7 @@ let rerenderEntireTree = (state) => {
     <React.StrictMode>
       <App
         stateaa={state}
-        addPost={store.addPost.bind(store)}
-        updatenewPost={store.updatenewPost.bind(store)}
-        updateDialogs={store.updateDialogs.bind(store)}
-        addNewDialog={store.addNewDialog.bind(store)}
+        dispatch={store.dispatch.bind(store)}
       />
     </React.StrictMode>,
     document.getElementById("root")

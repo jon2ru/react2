@@ -25,8 +25,7 @@ function App(props) {
               <Dialogs
                 dialogs2={props.stateaa.dialogPages.dialogs2}
                 messages2={props.stateaa.dialogPages.messages2}
-                addNewDialog={props.addNewDialog}
-                updateDialogs={props.updateDialogs}
+                dispatch={props.dispatch}
                 newDialog={props.stateaa.dialogPages.newDialog}
               />
             )}
@@ -36,8 +35,7 @@ function App(props) {
             render={() => (
               <Profile
                 post1={props.stateaa.profilePage}
-                addPost2={props.addPost}
-                updatenewPost3={props.updatenewPost}
+                dispatch={props.dispatch}
               />
             )}
           />
