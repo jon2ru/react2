@@ -2,7 +2,7 @@ import Dialogitem from "./Dialogitem/Dialogitem";
 import classes from "./Dialogs.module.css";
 import Messages from "./Messages/Messages";
 import React from "react";
-import { addDialogActionCreator, onDialogChangeActionCreator } from '../../Redux/State';
+import { addDialogActionCreator, onDialogChangeActionCreator } from '../../Redux/dialogReduser';
 
 const Dialogs = (props) => {
   let dialogsElements = props.dialogs2.map((d) => (
@@ -11,12 +11,14 @@ const Dialogs = (props) => {
   let messageElements = props.messages2.map((m) => (
     <Messages message={m.message} />
   ));
+  // let newDialogElement = React.createRef();
   let newDialogElement = React.createRef();
   let addDialog = () => {
     props.dispatch(addDialogActionCreator());//вызываю функцию
   };
-  let onDialogChange = () => {
-    let dialogyy = newDialogElement.current.value;
+  let onDialogChange = (e) => {
+    let dialogyy = e.target.value;
+    // получаю текст из textarea ref- убрал
     props.dispatch(onDialogChangeActionCreator(dialogyy));
     //передаю в state.js данные
   };
@@ -28,7 +30,7 @@ const Dialogs = (props) => {
         <div>
           <textarea
             onChange={onDialogChange}
-            ref={newDialogElement}
+            // ref={newDialogElement}
             value={props.newDialog}
           />
         </div>
