@@ -1,6 +1,14 @@
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
-const profileReduser = (state, action) => {
+let initialState = {
+  post: [
+    { id: 1, message: "Как дела", count: 2 },
+    { id: 2, message: "нормально", count: 5 },
+  ],
+  newPostText: "",
+};
+//начальный state
+const profileReduser = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST:
       let newPost = {
@@ -25,7 +33,8 @@ const profileReduser = (state, action) => {
       return state;
   }
 };
-export const addhhPostActionCreator = () => ({ type: ADD_POST });
+export const addhhPostActionCreator = () => 
+({ type: ADD_POST });
 export const onPostChangeActionCreator = (newtext5) => ({
   type: UPDATE_NEW_POST_TEXT,
   newText: newtext5,
