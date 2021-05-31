@@ -9,8 +9,9 @@ let rerenderEntireTree = (state) => {
   ReactDOM.render(
     <React.StrictMode>
       <App
-        stateaa={state}
-        dispatch={store.dispatch.bind(store)}
+      store={store}
+        /*stateaa={state}
+        dispatch={store.dispatch.bind(store)}*/
       />
     </React.StrictMode>,
     document.getElementById("root")

@@ -32,7 +32,7 @@ let initialState = {
       ),
     },
   ],
-  newDialog: "ee",
+  newDialog: "",
   messages2: [
     { id: 1, message: "привет" },
     { id: 2, message: "позвони мне" },
