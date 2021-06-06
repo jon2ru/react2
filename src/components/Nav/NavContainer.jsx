@@ -1,10 +1,17 @@
+import StoreContext from "../../StoreContext";
 import Nav from "./Nav";
 
 
-const NavContainer = (props) => {
-  let state= props.store.getState()
+const NavContainer = () => {
+  return <StoreContext.Consumer>
+     {
+      (store)=> {
+  let state= store.getState()
  return <Nav friends={state.dialogPages.dialogs2} 
- sideavata={state.sidebar} />;
+ sideavata={state.sidebar} />
+      }
+    }
+ </StoreContext.Consumer>
  };
 
 export default NavContainer;

@@ -3,19 +3,25 @@ import {
   addDialogActionCreator,
   onDialogChangeActionCreator,
 } from "../../Redux/dialogReduser";
+import StoreContext from "../../StoreContext";
 import Dialogs from "./Dialogs";
+import store from '../../Redux/State';
 
-const DialogsContainer = (props) => {
-  let state = props.store.getState().dialogPages;
+const DialogsContainer = () => {
+  
+  return  <StoreContext.Consumer>
+    {
+    (store) =>{
+    let state = store.getState().dialogPages;
   
   let addDialog = () => {
-    props.store.dispatch(addDialogActionCreator()); //вызываю функцию
+    store.dispatch(addDialogActionCreator()); //вызываю функцию
   };
   let onDialogChange = (dialogyy) => {
-    props.store.dispatch(onDialogChangeActionCreator(dialogyy));
+   store.dispatch(onDialogChangeActionCreator(dialogyy));
     //передаю в state.js данные
   };
-  return  <Dialogs 
+    return <Dialogs 
     addDialogA ={addDialog}
     onDialogCha2  ={onDialogChange}
     dialogPages={state}
@@ -23,7 +29,9 @@ const DialogsContainer = (props) => {
       messages2={state.dialogPages.messages2}
       newDialog={state.dialogPages.newDialog}*/
     />;
- 
+     }
+                      }
+ </StoreContext.Consumer>
 };
 
 export default DialogsContainer;

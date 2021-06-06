@@ -4,15 +4,23 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import StoreContext from "./StoreContext";
+import { BrowserRouter } from "react-router-dom";
 
 let rerenderEntireTree = (state) => {
   ReactDOM.render(
     <React.StrictMode>
+      <BrowserRouter>
+    <StoreContext.Provider value={store}>
       <App
-      store={store}
-        /*stateaa={state}
-        dispatch={store.dispatch.bind(store)}*/
+       /*
+       store={store}
+       stateaa={state}
+        dispatch={store.dispatch.bind(store)}
+        */
       />
+      </StoreContext.Provider>
+    </BrowserRouter>
     </React.StrictMode>,
     document.getElementById("root")
   ); 
