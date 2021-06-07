@@ -4,14 +4,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import StoreContext from "./StoreContext";
+import {Provider} from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
 let rerenderEntireTree = (state) => {
   ReactDOM.render(
     <React.StrictMode>
       <BrowserRouter>
-    <StoreContext.Provider value={store}>
+    <Provider store={store}>
       <App
        /*
        store={store}
@@ -19,7 +19,7 @@ let rerenderEntireTree = (state) => {
         dispatch={store.dispatch.bind(store)}
         */
       />
-      </StoreContext.Provider>
+      </Provider>
     </BrowserRouter>
     </React.StrictMode>,
     document.getElementById("root")

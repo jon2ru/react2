@@ -4,11 +4,10 @@ import {
   addhhPostActionCreator,
   onPostChangeActionCreator,
 } from "../../../Redux/profileReduser";
-import StoreContext from "../../../StoreContext";
 import MyPosts from "./MyPosts";
-import store from '../../../Redux/new-store';
+import { connect } from "react-redux";
 
-const MyPostsContainer = () => {
+/*const MyPostsContainer = () => {
   
   return (
     <StoreContext.Consumer>
@@ -20,8 +19,9 @@ const MyPostsContainer = () => {
           store.dispatch(addhhPostActionCreator());
           /*31,32 вызываю функцию? addPost
           в state.js */
-          /* props.updatenewPost('');обнуляю значение в textarea 
-          -перенес в state.js */
+/* props.updatenewPost('');обнуляю значение в textarea 
+          -перенес в state.js
+           
         };
         let onPostChange = (newtext5) => {
           let action = onPostChangeActionCreator(newtext5);
@@ -39,5 +39,22 @@ const MyPostsContainer = () => {
     }
     </StoreContext.Consumer>
   );
+};*/
+let mapStateToProps = (state) => {
+  return {
+    post: state.profilePage.post,
+    newPostText: state.profilePage.newPostText,
+  };
 };
+let mapDispatchToProps = (dispatch) => {
+  return {
+    addPost: () => {
+      dispatch(addhhPostActionCreator());
+    },
+    updateNewPostText: (newtext5) => {
+      dispatch(onPostChangeActionCreator(newtext5));
+    },
+  };
+};
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
 export default MyPostsContainer;
