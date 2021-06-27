@@ -42,19 +42,21 @@ let initialState = {
 const dialogReduser = (state = initialState, action) => {
   switch (action.type) {
     case ADD_NEW_DIALOG:
-      let neewDialog7 = {
-        id: 5,
-        nname: state.newDialog,
-        avatar: (
-          <img src="http://pngimg.com/uploads/spongebob/spongebob_PNG8.png" />
-        ),
-      };
-      state.dialogs2.push(neewDialog7); /* урок 32 */
-      state.newDialog = ""; // стираю текст в textarea
-      return state;
+      return{
+     ...state,
+     dialogs2:[...state.dialogs2,{id: 5,
+      nname: state.newDialog,
+      avatar: (
+        <img src="http://pngimg.com/uploads/spongebob/spongebob_PNG8.png" />
+      )}], /* урок 32 */
+     newDialog: "" // стираю текст в textarea
+      }
+      
     case UPDATE_DIALOGS:
-      state.newDialog = action.newDialogsNew; //получаю побуквенно из state.js
-      return state;
+      return{
+      ...state,
+      newDialog : action.newDialogsNew
+      } //получаю побуквенно из state.js
     default:
       return state;
   }

@@ -9,13 +9,13 @@ function App(props) {
   return (
       <div className="App">
         <Header />
-        <NavContainer
+          <NavContainer
          /* store={props.store}
           friends={props.stateaa.dialogPages.dialogs2}
     так как взял отсюда , то при изменении Dialogs.jsx
     меняется и в Nav.jsx 
       sideavata={props.stateaa.sidebar}*/
-        />
+       /> 
 
         <div className="app-content">
           <Route />

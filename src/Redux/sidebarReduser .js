@@ -16,6 +16,7 @@ let initialState = [
   },
 ];
 const sidebarReduser = (state = initialState, action) => {
+  //let stateCopy={...state};
   return state;
 };
 export default sidebarReduser;

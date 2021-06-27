@@ -7,7 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import {Provider} from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
-let rerenderEntireTree = (state) => {
+//let rerenderEntireTree = (state) => {
   ReactDOM.render(
     <React.StrictMode>
       <BrowserRouter>
@@ -24,12 +24,14 @@ let rerenderEntireTree = (state) => {
     </React.StrictMode>,
     document.getElementById("root")
   ); 
-};
-rerenderEntireTree(store.getState()); /* урок 33 отрисовываю тут */
+//};
+/*rerenderEntireTree(store.getState()); 
+ урок 33 отрисовываю тут 
 store.subscribe(()=>{
   let state= store.getState();
   rerenderEntireTree(state)
 });
+*/
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

@@ -1,0 +1,15 @@
+<script>
+  var a = {
+    name: "roma",
+    students: ["ivan", "andrey", "piter"],
+    classroom: {
+      teatcher: {
+        name: "sergey",
+        age: 25,
+      },
+    },
+  };
+  var b = { ...a };
+  b.classroom.teatcher.name="dmitry";
+console.log(a);
+</script>
