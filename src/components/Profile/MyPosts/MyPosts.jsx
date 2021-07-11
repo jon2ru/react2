@@ -2,7 +2,6 @@ import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import React from "react";
 // console.log(MyPosts);
-
 const MyPosts = (props) => {
 
   let postElement = props.post.map((p) => (
@@ -26,7 +25,6 @@ const MyPosts = (props) => {
     //props.dispatch(action);
     //при изменении в textarea передаю данные в state.js
   };
-  debugger;
   return (
     <div className={classes.post}>
       <h2>My Post</h2>

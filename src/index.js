@@ -9,7 +9,7 @@ import { BrowserRouter } from "react-router-dom";
 
 //let rerenderEntireTree = (state) => {
   ReactDOM.render(
-    <React.StrictMode>
+  //  <React.StrictMode>
       <BrowserRouter>
     <Provider store={store}>
       <App
@@ -20,8 +20,8 @@ import { BrowserRouter } from "react-router-dom";
         */
       />
       </Provider>
-    </BrowserRouter>
-    </React.StrictMode>,
+    </BrowserRouter>,
+ /*   </React.StrictMode>,*/
     document.getElementById("root")
   ); 
 //};
