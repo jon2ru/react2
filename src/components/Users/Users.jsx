@@ -1,52 +1,28 @@
 import React from "react";
 import styles from "./Users.module.css";
-import * as axios from "axios";
 import userPhoto from "../../assets/images/users.png";
 
-class Users extends React.Component {
+let Users = (props) => {
   /* constructor(props) {
     super(props);
     axios
        } если constructor ничего не делает и 
        только отрисовывается через super, то его можно не писать*/
-  componentDidMount() {
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
-      ) // обратные кавычки на букве ё
-      .then((response) => {
-        this.props.setUsers(response.data.items);
-        this.props.setTotalUsersCount(response.data.totalCount);
-        //totalCount-на сервере число пользователей
-      });
-    }//END componentDidMount
-   onPageChanged = (pageNumber) => {
-    this.props.setCurrentPage(pageNumber);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`
-      )
-      .then((response) => {
-        this.props.setUsers(response.data.items);
-      });
-  };// END onPageChanged
-  render() {
-    let pagesCount = Math.ceil(
-      this.props.totalUsersCount / this.props.pageSize
-    );
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-      pages.push(i);
-    }
+
+  let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+  let pages = [];
+  for (let i = 1; i <= pagesCount; i++) {
+    pages.push(i);
+  }//end for
     return (
       <div>
         <div>
           {pages.map((p) => {
             return (
               <span
-                className={this.props.currentPage === p && styles.selectedPage}
+                className={props.currentPage === p && styles.selectedPage}
                 onClick={() => {
-                 this.onPageChanged(p);
+                  props.onPageChanged(p);
                 }}
               >
                 {p}
@@ -54,7 +30,7 @@ class Users extends React.Component {
             );
           })}
         </div>
-        {this.props.users.map((u) => (
+        {props.users.map((u) => (
           <div key={u.id}>
             <span>
               <div>
@@ -68,7 +44,7 @@ class Users extends React.Component {
                   u.followed ? (
                     <button
                       onClick={() => {
-                        this.props.follow(u.id);
+                        props.follow(u.id);
                       }}
                     >
                       Follow
@@ -76,7 +52,7 @@ class Users extends React.Component {
                   ) : (
                     <button
                       onClick={() => {
-                        this.props.unfollow(u.id);
+                        props.unfollow(u.id);
                       }}
                     >
                       Unfollow
@@ -100,6 +76,5 @@ class Users extends React.Component {
         ))}
       </div>
     );
-  }
-}
+}; //end Users
 export default Users;

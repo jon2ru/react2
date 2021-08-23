@@ -42,7 +42,7 @@ const usersReduser = (state = initialState, action) => {
     case SET_USERS:
       return {
         ...state,
-        users: [/*...state.users, появляются дубли*/ ...action.users],
+        users:/*...state.users, появляются дубли*/action.users,
       };
     case SET_CURRENT_PAGE:
       return {
