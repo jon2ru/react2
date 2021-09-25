@@ -1,12 +1,12 @@
 import { connect } from "react-redux";
 import UsersApiContainer from "./UsersApiContainer";
 import {
-  unfollowAC,
-  followAC,
-  setusersAC,
-  setcurrentpageAC,
-  setTotalUsersCountAC,
-  toggleIsFetchingAC,
+  unfollow,
+  follow,
+  setusers,
+  setcurrentpage,
+  setTotalUsersCount,
+  toggleIsFetching,
 } from "../../Redux/usersReduser";
 let mapStateToProps = (state) => {
   return {
@@ -18,7 +18,7 @@ let mapStateToProps = (state) => {
   };
 };
 
-let mapDispatchToProps = (dispatch) => {
+/*let mapDispatchToProps = (dispatch) => {
   return {
     follow: (userid) => {
       dispatch(followAC(userid));
@@ -39,9 +39,9 @@ let mapDispatchToProps = (dispatch) => {
       dispatch(toggleIsFetchingAC(isFetching));
     },
   };
-};
+}; урок 58 убрал mapDispatchToProps*/
 const UsersContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps,{follow,unfollow,setusers,setcurrentpage,setTotalUsersCount,toggleIsFetching}
+ 
 )(UsersApiContainer);
 export default UsersContainer;

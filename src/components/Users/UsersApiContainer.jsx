@@ -11,13 +11,13 @@ class UsersApiContainer extends React.Component {
       ) // обратные кавычки на букве ё
       .then((response) => {
         this.props.toggleIsFetching(false);
-        this.props.setUsers(response.data.items);
+        this.props.setusers(response.data.items);
         this.props.setTotalUsersCount(response.data.totalCount);
         //totalCount-на сервере число пользователей
       });
   } //END componentDidMount
   onPageChanged = (pageNumber) => {
-    this.props.setCurrentPage(pageNumber);
+    this.props.setcurrentpage(pageNumber);
     this.props.toggleIsFetching(true);
     axios
       .get(
@@ -25,7 +25,7 @@ class UsersApiContainer extends React.Component {
       )
       .then((response) => {
         this.props.toggleIsFetching(false);
-        this.props.setUsers(response.data.items);
+        this.props.setusers(response.data.items);
       });
   }; // END onPageChanged
   render() {

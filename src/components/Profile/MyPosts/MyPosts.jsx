@@ -12,7 +12,7 @@ const MyPosts = (props) => {
   // let newtext = newPostElement.current.value; -перенес в state
  props.addPost();
   //props.dispatch(addhhPostActionCreator());
-  /*31,32 вызываю функцию? addPost
+  /*31,32 вызываю функцию addPost
     в state.js */
     /* props.updatenewPost('');обнуляю значение в textarea 
     -перенес в state.js */
