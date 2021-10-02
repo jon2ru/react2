@@ -12,7 +12,7 @@ const Profileinfo = (props) => {
       <img src={props.profile.photos.large} />
       <div>avat+descr</div>
       <div>обо мне: {props.profile.aboutMe}</div>
-      <div>ищешь работу?{props.profile.lookingForAJob== true ? Да: Нет}</div>
+      <div>ищешь работу?{props.profile.lookingForAJob== true ? 'Да': 'Нет'}</div>
       <div>
         какую хочешь работу? {props.profile.lookingForAJobDescription}
         </div>

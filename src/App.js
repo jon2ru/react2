@@ -3,7 +3,7 @@ import Header from "./components/Header/Header";
 import { Route } from "react-router-dom";
 import NavContainer from "./components/Nav/NavContainer";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import UsersContainer from './components/Users/UsersContainer';
+import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 function App(props) {
   return (
@@ -20,8 +20,9 @@ function App(props) {
       <div className="app-content">
         {/* <Route /> */}
         <Route path="/dialogs/" render={() => <DialogsContainer />} />
-        <Route path="/profile/" render={() => <ProfileContainer />} />
-      <Route path="/users/" render={() => <UsersContainer />} />
+        <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
+
+        <Route path="/users/" render={() => <UsersContainer />} />
       </div>
     </div>
   );
