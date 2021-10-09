@@ -5,3 +5,10 @@ background-color: rgb(5, 214, 40);
 .item{
   color: deeppink;
 }
+.loginBlock{
+  float: right;
+ /* color:white;*/
+}
+.loginBlock a{
+  color:white;
+}

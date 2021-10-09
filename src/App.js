@@ -1,5 +1,5 @@
 import "./App.css";
-import Header from "./components/Header/Header";
+import HeaderContainer from "./components/Header/HeaderContainer";
 import { Route } from "react-router-dom";
 import NavContainer from "./components/Nav/NavContainer";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
@@ -8,7 +8,7 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 function App(props) {
   return (
     <div className="App">
-      <Header />
+      <HeaderContainer />
       <NavContainer
       /* store={props.store}
           friends={props.stateaa.dialogPages.dialogs2}
