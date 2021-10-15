@@ -9,7 +9,7 @@ let initialState = {
   pageSize: 10, //сколько показывать юзеров
   totalUsersCount: 0, //сколько всего юзеров
   currentPage: 1, // выделен жирным номер страницы
-  isFetching:false,
+  isFetching:false, //
 };
 
 const usersReduser = (state = initialState, action) => {

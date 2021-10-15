@@ -8,6 +8,8 @@ import {
   setTotalUsersCount,
   toggleIsFetching,
 } from "../../Redux/usersReduser";
+//follow={this.state.follow}
+//unfollow={this.state.unfollow}
 let mapStateToProps = (state) => {
   return {
     users: state.usersPage.users,
