@@ -8,8 +8,6 @@ import {
   setTotalUsersCount,
   toggleIsFetching,
 } from "../../Redux/usersReduser";
-//follow={this.state.follow}
-//unfollow={this.state.unfollow}
 let mapStateToProps = (state) => {
   return {
     users: state.usersPage.users,
@@ -41,7 +39,9 @@ let mapStateToProps = (state) => {
       dispatch(toggleIsFetchingAC(isFetching));
     },
   };
-}; урок 58 убрал mapDispatchToProps*/
+};
+
+ урок 58 убрал mapDispatchToProps*/
 const UsersContainer = connect(
   mapStateToProps,{follow,unfollow,setusers,setcurrentpage,setTotalUsersCount,toggleIsFetching}
  

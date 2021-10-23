@@ -3,6 +3,7 @@ import styles from "./Users.module.css";
 import userPhoto from "../../assets/images/users.png";
 import { NavLink } from "react-router-dom";
 import * as axios from "axios";
+import  {followApi, unfollowApi} from "../../api/api"
 
 let Users = (props) => {
   /* constructor(props) {
@@ -24,7 +25,7 @@ let Users = (props) => {
           return (
             <span
               className={props.currentPage === p && styles.selectedPage}
-              //выделяю жирным текущую страницу
+              //currentPage=выделяю жирным текущую страницу
               onClick={() => {
                 props.onPageChanged(p);
               }}
@@ -47,13 +48,13 @@ let Users = (props) => {
             </div>
             <div>
               {
-                u.followed !== true ? (
+                u.followed ? (
                     <button
                     onClick={() => {
-                      axios.post(
-                       `https://social-network.samuraijs.com/api/1.0//follow/${u.id}`,
-                        {}, { withCredentials: true /* передать куку. пишется 3м параметром в post*/,
-                          headers:{'API-KEY': '66060485-250e-40e6-994f-36765b804827'}}
+                      axios.delete(
+                        `https://social-network.samuraijs.com/api/1.0//follow/${u.id}`,
+                        { withCredentials: true /* передать куку. пишется 2м параметром в delete,get*/,
+                        headers:{'API-KEY': '66060485-250e-40e6-994f-36765b804827'}}
                       )
                       .then((response) => {
                         if (response.data.resultCode === 0) {
@@ -65,9 +66,10 @@ let Users = (props) => {
                 ) : (
                   <button
                     onClick={() => {
-                      axios.delete(
-                        `https://social-network.samuraijs.com/api/1.0//follow/${u.id}`,{ withCredentials: true /* передать куку. пишется 2м параметром в delete,get*/,
-                        headers:{'API-KEY': '66060485-250e-40e6-994f-36765b804827'}}
+                      axios.post(
+                        `https://social-network.samuraijs.com/api/1.0//follow/${u.id}`,
+                         {}, { withCredentials: true /* передать куку. пишется 3м параметром в post*/,
+                           headers:{'API-KEY': '66060485-250e-40e6-994f-36765b804827'}}
                         )
                        .then((response) => {
                          if (response.data.resultCode === 0) {

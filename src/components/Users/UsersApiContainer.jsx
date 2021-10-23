@@ -1,34 +1,28 @@
 import React from "react";
 import Users from "./Users";
-import * as axios from "axios";
 import Preloader from "../common/Preloader/Preloader";
+import {usersApi}  from "../../api/api";
 class UsersApiContainer extends React.Component {
   componentDidMount() {
     this.props.toggleIsFetching(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-        { withCredentials: true }
-      ) // обратные кавычки на букве ё
-      .then((response) => {
+    usersApi.getUsera(this.props.currentPage, this.props.pageSize)
+  //запрос на сервер данные на api.js урок 63, 7:00
+  //baseURL: "https://social-network.samuraijs.com/api/1.0/",
+    .then((data) => {
+         // response в api.js поменял на data 63
         this.props.toggleIsFetching(false);
-        this.props.setusers(response.data.items);
-        this.props.setTotalUsersCount(response.data.totalCount);
+        this.props.setusers(data.items);
+        this.props.setTotalUsersCount(data.totalCount);
         //totalCount-на сервере число пользователей
       });
   } //END componentDidMount
   onPageChanged = (pageNumber) => {
     this.props.setcurrentpage(pageNumber);
     this.props.toggleIsFetching(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}}`,
-        { withCredentials: true }
-      )
-      .then((response) => {
-        this.props.toggleIsFetching(false);
-        this.props.setusers(response.data.items);
-      });
+    usersApi.getUsera(pageNumber, this.props.pageSize).then((data) => {
+      this.props.toggleIsFetching(false);
+     this.props.setusers(data.items);
+    });
   }; // END onPageChanged
   render() {
     return (

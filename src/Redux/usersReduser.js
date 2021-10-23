@@ -11,7 +11,6 @@ let initialState = {
   currentPage: 1, // выделен жирным номер страницы
   isFetching:false, //
 };
-
 const usersReduser = (state = initialState, action) => {
   switch (action.type) {
     case FOLLOW:
@@ -21,7 +20,7 @@ const usersReduser = (state = initialState, action) => {
           if (u.id === action.userId) {
             return {
               ...u,
-              followed: true,
+              followed:true,
             };
           }
           return u;
@@ -34,7 +33,7 @@ const usersReduser = (state = initialState, action) => {
           if (u.id === action.userId) {
             return {
               ...u,
-              followed: false,
+              followed:false,
             };
           }
           return u;
