@@ -49,8 +49,9 @@ let Users = (props) => {
             <div>
               {
                 u.followed ? (
-                    <button
+                    <button disabled={props.followingInProgress.some(id=>id===u.id)}
                     onClick={() => {
+                      props.toggleFollowInProgress(true,u.id);
                       axios.delete(
                         `https://social-network.samuraijs.com/api/1.0//follow/${u.id}`,
                         { withCredentials: true /* передать куку. пишется 2м параметром в delete,get*/,
@@ -58,14 +59,16 @@ let Users = (props) => {
                       )
                       .then((response) => {
                         if (response.data.resultCode === 0) {
-                      props.follow(u.id);
-                      }  })
+                        props.follow(u.id);
+                      } 
+                      props.toggleFollowInProgress(false,u.id); })
                      } }
                     >Follow
                   </button>
                 ) : (
-                  <button
+                  <button disabled={props.followingInProgress.some(id=>id===u.id)}
                     onClick={() => {
+                      props.toggleFollowInProgress(true,u.id);
                       axios.post(
                         `https://social-network.samuraijs.com/api/1.0//follow/${u.id}`,
                          {}, { withCredentials: true /* передать куку. пишется 3м параметром в post*/,
@@ -74,7 +77,8 @@ let Users = (props) => {
                        .then((response) => {
                          if (response.data.resultCode === 0) {
                        props.unfollow(u.id);
-                      }  })
+                      }  
+                      props.toggleFollowInProgress(false,u.id);})
                     } }
                   >
                     Unfollow

@@ -7,6 +7,7 @@ import {
   setcurrentpage,
   setTotalUsersCount,
   toggleIsFetching,
+  toggleFollowInProgress
 } from "../../Redux/usersReduser";
 let mapStateToProps = (state) => {
   return {
@@ -15,7 +16,8 @@ let mapStateToProps = (state) => {
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
     isFetching: state.usersPage.isFetching,
-  };
+    followingInProgress: state.usersPage.followingInProgress,
+    };
 };
 
 /*let mapDispatchToProps = (dispatch) => {
@@ -43,7 +45,7 @@ let mapStateToProps = (state) => {
 
  урок 58 убрал mapDispatchToProps*/
 const UsersContainer = connect(
-  mapStateToProps,{follow,unfollow,setusers,setcurrentpage,setTotalUsersCount,toggleIsFetching}
+  mapStateToProps,{follow,unfollow,setusers,setcurrentpage,setTotalUsersCount,toggleIsFetching,toggleFollowInProgress}
  
 )(UsersApiContainer);
 export default UsersContainer;

@@ -11,6 +11,7 @@ export const usersApi = {
   getUsera(currentPage = 1, pageSize = 10) {
     return instance
       .get(`users?page=${currentPage}&count=${pageSize}`)
+      //запрос в userApiContainer
 
       .then((response) => {
         return response.data;
