@@ -4,7 +4,8 @@ import Preloader from "../common/Preloader/Preloader";
 import {usersApi}  from "../../api/api";
 class UsersApiContainer extends React.Component {
   componentDidMount() {
-    this.props.toggleIsFetching(true);
+    this.props.getUserThunkCreator(this.props.currentPage, this.props.pageSize);
+    /*this.props.toggleIsFetching(true);
     usersApi.getUsera(this.props.currentPage, this.props.pageSize)
   //запрос на сервер данные на api.js урок 63, 7:00
   //baseURL: "https://social-network.samuraijs.com/api/1.0/",
@@ -14,16 +15,18 @@ class UsersApiContainer extends React.Component {
         this.props.setusers(data.items);
         this.props.setTotalUsersCount(data.totalCount);
         //totalCount-на сервере число пользователей
-      });
+      });*/
   } //END componentDidMount
   onPageChanged = (pageNumber) => {
+    this.props.getUserThunkCreator(pageNumber, this.props.pageSize);
+    /*
     this.props.setcurrentpage(pageNumber);
     this.props.toggleIsFetching(true);
     usersApi.getUsera(pageNumber, this.props.pageSize).then((data) => {
       //запрос на сервер
       this.props.toggleIsFetching(false);
      this.props.setusers(data.items);
-    });
+    });*/
   }; // END onPageChanged
   render() {
     return (
@@ -37,10 +40,8 @@ class UsersApiContainer extends React.Component {
           users={this.props.users}
           onPageChanged={this.onPageChanged}
           follow={this.props.follow}
-          debugger
           unfollow={this.props.unfollow}
           followingInProgress={this.props.followingInProgress}
-          toggleFollowInProgress={this.props.toggleFollowInProgress}
         />
       </>
     );

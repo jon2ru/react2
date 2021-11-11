@@ -3,11 +3,9 @@ import UsersApiContainer from "./UsersApiContainer";
 import {
   unfollow,
   follow,
-  setusers,
   setcurrentpage,
-  setTotalUsersCount,
-  toggleIsFetching,
-  toggleFollowInProgress
+  toggleFollowInProgress,
+  getUserThunkCreator
 } from "../../Redux/usersReduser";
 let mapStateToProps = (state) => {
   return {
@@ -45,7 +43,9 @@ let mapStateToProps = (state) => {
 
  урок 58 убрал mapDispatchToProps*/
 const UsersContainer = connect(
-  mapStateToProps,{follow,unfollow,setusers,setcurrentpage,setTotalUsersCount,toggleIsFetching,toggleFollowInProgress}
+  mapStateToProps,{follow,unfollow,setcurrentpage,
+  toggleFollowInProgress,
+    getUserThunkCreator}
  
 )(UsersApiContainer);
 export default UsersContainer;
