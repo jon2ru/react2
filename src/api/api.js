@@ -1,7 +1,7 @@
 import * as axios from "axios";
 
 const instance = axios.create({
-  withCredentials: true,
+  withCredentials: true,/* передать куку*/
   baseURL: "https://social-network.samuraijs.com/api/1.0/",
   headers: { "API-KEY": "66060485-250e-40e6-994f-36765b804827" },
 });
@@ -23,12 +23,21 @@ export const usersApi = {
 
   followApi(userId) {
     return instance.delete(
-      `https://social-network.samuraijs.com/api/1.0/follow/${userId}`
+      `follow/${userId}`
     );
   },
   unfollowApi(userId) {
     return instance.post(
-      `https://social-network.samuraijs.com/api/1.0/follow/${userId}`
+      `follow/${userId}`
     );
   },
+  getProfileApi(userIdd){
+    return instance.get(`profile/`+userIdd)
+     // обратные кавычки на букве ё
+  }
 };
+export const loginApi={
+  me(){
+    return instance.get(`auth/me`)
+  }
+}
