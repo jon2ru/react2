@@ -107,6 +107,7 @@ export const getUserThunkCreator = (currentPage, pageSize) => {
       .then((data) => {
         // response в api.js поменял на data 63
         dispatch(toggleIsFetching(false));
+        //выше крутилку убрал
         dispatch(setusers(data.items));
         dispatch(setTotalUsersCount(data.totalCount));
         //totalCount-на сервере число пользователей

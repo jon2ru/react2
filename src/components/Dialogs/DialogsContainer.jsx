@@ -1,5 +1,5 @@
-import React from "react";
 import { connect } from "react-redux";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import {
   addDialogActionCreator,
   onDialogChangeActionCreator,
@@ -21,6 +21,7 @@ let mapDispatchToProps = (dispatch) => {
     },
   };
 };
-const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)
-(Dialogs);
+let withRedirect= withAuthRedirect(Dialogs)
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)
+  (withRedirect);
 export default DialogsContainer;
