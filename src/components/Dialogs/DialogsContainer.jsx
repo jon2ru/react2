@@ -5,6 +5,7 @@ import {
   onDialogChangeActionCreator,
 } from "../../Redux/dialogReduser";
 import Dialogs from "./Dialogs";
+import {compose} from "redux";
 
 
 
@@ -21,7 +22,8 @@ let mapDispatchToProps = (dispatch) => {
     },
   };
 };
-let withRedirect= withAuthRedirect(Dialogs)
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)
-  (withRedirect);
-export default DialogsContainer;
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+    //возьми Dialogs и закинь его в withAuthRedirect,а потом результат в connect(mapStateToProps...
+)(Dialogs)
