@@ -7,6 +7,8 @@ import {
   toggleFollowInProgress,
   getUserThunkCreator
 } from "../../Redux/usersReduser";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 let mapStateToProps = (state) => {
   return {
     users: state.usersPage.users,
@@ -42,10 +44,12 @@ let mapStateToProps = (state) => {
 };
 
  урок 58 убрал mapDispatchToProps*/
-const UsersContainer = connect(
-  mapStateToProps,{follow,unfollow,setcurrentpage,
-  toggleFollowInProgress,
-    getUserThunkCreator}
- 
+const UsersContainer = compose( withAuthRedirect,
+    connect(
+    mapStateToProps,{follow,unfollow,setcurrentpage,
+      toggleFollowInProgress,
+      getUserThunkCreator})
 )(UsersApiContainer);
 export default UsersContainer;
+
+

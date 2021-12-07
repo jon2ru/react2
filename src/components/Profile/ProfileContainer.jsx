@@ -31,3 +31,4 @@ withAuthRedirect,
 //withRouter получаю из url нужнцю часть
     withRouter
 )(ProfileContainer);
+//возьми ProfileContainer и закинь его в withRouter--> withAuthRedirect,а потом результат в connect(mapStateToProps...
