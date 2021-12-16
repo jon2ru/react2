@@ -32,10 +32,24 @@ export const usersApi = {
     );
   },
   getProfileApi(userIdd){
-    return instance.get(`profile/`+userIdd)
-     // обратные кавычки на букве ё
+    console.warn('Obsolete method. Please profileApi object.');
+    return profileApi.getProfileApi(userIdd)
   }
 };
+
+export const profileApi = {
+  getProfileApi(userIdd){
+    return instance.get(`profile/`+userIdd)
+  },
+  //получил : ищу работу... фото и др.
+  getUserStatus(userIdd){
+    return instance.get(`profile/status/`+userIdd)
+  },
+  updateStatus(status){
+    return instance.put(`status/`,{status:status})
+  }
+  // отправляю на сервер объект -> status:status
+  };
 export const loginApi={
   me(){
     return instance.get(`auth/me`)

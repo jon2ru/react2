@@ -1,7 +1,7 @@
 import React from "react";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import {usersApi}  from "../../api/api";
+//import {usersApi}  from "../../api/api";
 class UsersApiContainer extends React.Component {
   componentDidMount() {
     this.props.getUserThunkCreator(this.props.currentPage, this.props.pageSize);

@@ -1,7 +1,7 @@
 import React from "react";
 import Profile from "./Profile";
 import { connect } from "react-redux";
-import { profilesData } from "../../Redux/profileReduser";
+import { profilesData,getStatus,updateUserStatus} from "../../Redux/profileReduser";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import {withRouter} from "react-router-dom";
 import {compose} from "redux";
@@ -16,6 +16,7 @@ class ProfileContainer extends React.Component {
       userIdd=2;
     }
     this.props.profilesData(userIdd);
+    this.props.getStatus(userIdd);
     //вызываю thunk из редюсера
   } //end componentDidMount
   render() {
@@ -24,9 +25,10 @@ class ProfileContainer extends React.Component {
 } //end ProfileContainer
 let mapStateToProps = (state) => ({
   profile: state.profilePage.profile,
+  status: state.profilePage.status,
 });
 export default compose(
-    connect(mapStateToProps,{ profilesData }),
+    connect(mapStateToProps,{ profilesData,getStatus,updateUserStatus }),
 withAuthRedirect,
 //withRouter получаю из url нужнцю часть
     withRouter
