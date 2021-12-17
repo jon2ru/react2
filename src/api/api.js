@@ -46,8 +46,8 @@ export const profileApi = {
     return instance.get(`profile/status/`+userIdd)
   },
   updateStatus(status){
-    return instance.put(`status/`,{status:status})
-  }
+    return instance.put(`profile/status/`,{status:status})
+  },
   // отправляю на сервер объект -> status:status
   };
 export const loginApi={

@@ -13,7 +13,7 @@ class ProfileContainer extends React.Component {
     /*когда вызывается withRouter из url метод match возвращает params-userId
     и получаю id юзера*/
     if (!userIdd) {
-      userIdd = 2;
+      userIdd = 20104;
     }
     this.props.profilesData(userIdd);
     this.props.getStatus(userIdd);

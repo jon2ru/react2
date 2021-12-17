@@ -15,6 +15,7 @@ const Profileinfo = (props) => {
       <ProfileStatus status={props.status}
       updateUserStatus={props.updateUserStatus}/>
       <div>avat+descr</div>
+      <div>Имя:{props.profile.fullName}</div>
       <div>обо мне: {props.profile.aboutMe}</div>
       <div>ищешь работу?{props.profile.lookingForAJob== true ? 'Да': 'Нет'}</div>
       <div>

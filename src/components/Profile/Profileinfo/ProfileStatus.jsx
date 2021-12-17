@@ -22,16 +22,23 @@ class ProfileStatus extends React.Component {
         //взял status из локального state
     };
     //урок 71 фокус
-    onStatusChange=(e)=>{
+    onStatusChange = (e) => {
         this.setState(
-     {status: e.currentTarget.value});
+            { status: e.currentTarget.value });
+    }
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.status !== this.props.status) {
+            this.setState(
+                { status: this.props.status }
+            );
+        };
     }
     render() {
         return (
             <div>{!this.state.editMode &&
                 //если editMode в стейте=false ,то...
                 <div>
-                    <span onDoubleClick={this.activateEditMode}>{this.props.status}</span>
+                    <span onDoubleClick={this.activateEditMode}>{this.props.status || "no status"}</span>
                 </div>
             }
                 {this.state.editMode &&
