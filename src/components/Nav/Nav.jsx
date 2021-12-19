@@ -32,6 +32,9 @@ const Nav = (props) => {
       <div className={classes.item}>
         <NavLink to="/musik">Music</NavLink>
       </div>
+      <div className={classes.item}>
+        <NavLink to="/login">Login</NavLink>
+      </div>
       <div className={`${classes.item} ${classes.aert}`}>
         {/* 2 стиля для одного элемента перестало работать*/}
         <a>Settings</a>
