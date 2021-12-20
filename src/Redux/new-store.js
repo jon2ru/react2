@@ -16,5 +16,6 @@ let redusers = combineReducers({
   auth: authReduser,
 });
 let store = createStore(redusers,applyMiddleware(thunk));
-//window.store = store;урок 59, 29:38
+window.store = store;
+//урок 59, 29:38
 export default store;

@@ -1,28 +1,33 @@
 import React from "react";
-import { reduxForm } from "redux-form";
+import { Field, reduxForm } from "redux-form";
 const LoginForm = (props) => {
-  return <form>
+  return <form onSubmit={props.handleSubmit}>
     <div>
-      <input placeholder={"login" }/>
+      <Field placeholder={"login"} name={"Login"} component={"input"} />
     </div>
     <div>
-      <input placeholder={"password"}/>
+      <Field placeholder={"password"} component={"input"} name={"password"} />
     </div>
     <div>
-      <input type={"checkbox"} />remember me
+      <Field type={"checkbox"} name={"rememberMe"} component={"input"} />remember me
     </div>
     <div>
       <button>Login</button>
     </div>
   </form>
 };
-const loginReduxForm = reduxForm({form: "login"})(LoginForm);
-//по типу connect
+const LoginReduxForm = reduxForm({ form: "login" })(LoginForm);
+/*обворачиваем (хоком reduxForm) компоненту LoginForm
+ и получаем контейнерную  компоненту LoginReduxForm */
 const Login = (props) => {
-  return (
-    <div>
-      <h1>LOGIN</h1>
-      <loginReduxForm />
-    </div>)
+  const aonSubmit=(formData)=>{
+    //75 урок 32:00 formData значение из reduxForm->handleSubmit
+console.log(formData);
+//без console.log не работает
+  }
+  return <div>
+    <h1>LOGIN</h1>
+    <LoginReduxForm onSubmit={aonSubmit}/>
+  </div>
 };
 export default Login;
