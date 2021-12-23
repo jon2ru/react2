@@ -1,5 +1,4 @@
 const ADD_NEW_DIALOG = "ADD-NEW-DIALOG";
-const UPDATE_DIALOGS = "UPDATE-DIALOGS";
 let initialState = {
   dialogs2: [
     {
@@ -32,7 +31,7 @@ let initialState = {
       ),
     },
   ],
-  newDialog: "",
+  //newDialog: "",
   messages2: [
     { id: 1, message: "привет" },
     { id: 2, message: "позвони мне" },
@@ -45,27 +44,17 @@ const dialogReduser = (state = initialState, action) => {
       return{
      ...state,
      dialogs2:[...state.dialogs2,{id: 5,
-      nname: state.newDialog,
+      nname: action.newDialog,
       avatar: (
         <img src="http://pngimg.com/uploads/spongebob/spongebob_PNG8.png" />
       )}], /* урок 32 */
-     newDialog: "" // стираю текст в textarea
+     //newDialog: "" // стираю текст в textarea
       }
-      
-    case UPDATE_DIALOGS:
-      return{
-      ...state,
-      newDialog : action.newDialogsNew
-      } //получаю побуквенно из state.js
     default:
       return state;
   }
 };
 // если функция только возвращает значение то можно без return
-export const addDialogActionCreator = () =>
- ({ type: ADD_NEW_DIALOG });
-export const onDialogChangeActionCreator = (dialogyy) => ({
-  type: UPDATE_DIALOGS,
-  newDialogsNew: dialogyy,
-});
+export const addDialogActionCreator = (newDialog) =>
+ ({ type: ADD_NEW_DIALOG,newDialog});
 export default dialogReduser;

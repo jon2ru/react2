@@ -2,44 +2,45 @@ import Dialogitem from "./Dialogitem/Dialogitem";
 import classes from "./Dialogs.module.css";
 import Messages from "./Messages/Messages";
 import React from "react";
+import { Field, reduxForm } from "redux-form";
 const Dialogs = (props) => {
-  let state=props.dialogPages;
- let  newDialog =state.newDialog
+  let state = props.dialogPages;
   let dialogsElements = state.dialogs2.map((d) => (
     <Dialogitem name={d.nname} id={d.id} avatar={d.avatar} />
   ));
   let messageElements = state.messages2.map((m) => (
     <Messages message={m.message} />
   ));
-  // let newDialogElement = React.createRef();
-  let addDialog = () => {
-    props.addDialogA();//вызываю функцию
-  };
-  let onDialogChange = (e) => {
-    let dialogyy = e.target.value;
-    // получаю текст из textarea ref- убрал
-    props.onDialogCha2(dialogyy);
-    //передаю в state.js данные
-  };
+  const addNewMessage=(values)=>{
+    props.addDialogA(values.newDialog);//вызываю функцию из dialogsContainer;
+  }
   return (
     <div className={classes.dialogs}>
       <div className={classes.dialogsitem}>{dialogsElements}</div>
       <div className={classes.dialog}>{messageElements}</div>
       <div className={classes.dialogsitem}>
-        <div>
-          <textarea
-            onChange={onDialogChange}
-            // ref={newDialogElement}
-            value={newDialog}
-            placeholder="введите"
-          />
-        </div>
-        <div>
-          <button onClick={addDialog}>Add dialog</button>
-        </div>
+        <AddMessageReduxForm onSubmit={addNewMessage}/>
       </div>
     </div>
   );
 };
-
+const addMessageForm = (props) => {
+  return (
+  <form onSubmit={props.handleSubmit}>
+    <div>
+    <Field component="textarea" name="newDialog" placeholder="введите" />
+    </div>
+    <div>
+      <button>Add dialog</button>
+    </div>
+  </form>
+  /*
+              onChange={onDialogChange}
+              //убрал ещё до редаксформ ref={newDialogElement}
+              value={newDialog}
+              placeholder="введите"
+  */
+  )
+};
+const AddMessageReduxForm= reduxForm({ form: "dialogAddMessageForm" })(addMessageForm);
 export default Dialogs;
