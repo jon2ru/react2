@@ -9,9 +9,9 @@ const MyPosts = (props) => {
     <Post message={p.message} count={p.count} />
   ));
   let newPostElement = React.createRef(); /* 31 реакт создай ссылку*/
-  let addhhPost = () => {
+  let addhhPost = (values) => {
     // let newtext = newPostElement.current.value; -перенес в state
-    props.addPost();
+    props.addPost(values.newPostText);
     //props.dispatch(addhhPostActionCreator());
     /*31,32 вызываю функцию addPost
       в state.js */
@@ -26,25 +26,27 @@ const MyPosts = (props) => {
     //props.dispatch(action);
     //при изменении в textarea передаю данные в state.js
   };
-  <div className={classes.post}>
-    <h2>My Post</h2>
-    <div>
-   < PostReduxForm onSubmit={h}/>
-    </div>
-  const myPostForm=(props)=> {
   return (
-    <form onSubmit={props.handleSubmit}>
+    <div className={classes.post}>
+      <h2>My Post</h2>
       <div>
-        <Field component="textarea" name="newPostText" placeholder="введите" />
+        <PostReduxForm onSubmit={addhhPost}/>
       </div>
-      <div>
-        <button>Add post</button>
-      </div>
-    </form>
-    <div className={classes.newpost}>{postElement}</div>
-  </div>
+      <div className={classes.newpost}>{postElement}</div>
+    </div>
   );
-  }
 };
-const PostReduxForm = reduxForm({ form: "newPostText" })(myPostForm);
+const myPostForm= (props) => {
+  return(
+  <form onSubmit={props.handleSubmit}>
+    <div>
+      <Field component="textarea" name="newPostText" placeholder="введите" />
+    </div>
+    <div>
+      <button >Add post</button>
+    </div>
+  </form>
+  )
+};
+const PostReduxForm = reduxForm({ form: "myPostText" })(myPostForm);
 export default MyPosts;

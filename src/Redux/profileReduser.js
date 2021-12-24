@@ -1,6 +1,5 @@
 import { profileApi } from "../api/api";
 const ADD_POST = "ADD-POST";
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const GET_STATUS = "GET_STATUS";
 let initialState = {
@@ -8,7 +7,7 @@ let initialState = {
     { id: 1, message: "Как дела", count: 2 },
     { id: 2, message: "нормально", count: 5 },
   ],
-  newPostText: "",
+  //newPostText: "",
   profile: null,
   status: "",
 };
@@ -20,24 +19,15 @@ const profileReduser = (state = initialState, action) => {
       // let stateCopy тут и ниже
       let newPost = {
         id: 3,
-        message: state.newPostText,
-        //message -получаю значение напрямую из state
+       message: action.newPostText,
         count: 0,
       };
       return {
         ...state,
         post: [...state.post, newPost],
         //it is array []
-        newPostText: "", // стираю текст в textarea
+       // newPostText: "", // стираю текст в textarea
         //после return функция не выполняется это вместо break
-      };
-    case UPDATE_NEW_POST_TEXT:
-      /*функция для побуквенной 
-               отрисовки при изменении в ul */
-      return {
-        ...state,
-        newPostText: action.newText /* урок 34 
-    тут запись текста в state*/,
       };
     case SET_USER_PROFILE:
       return {
@@ -53,11 +43,7 @@ const profileReduser = (state = initialState, action) => {
       return state;
   }
 };
-export const addhhPostActionCreator = () => ({ type: ADD_POST });
-export const onPostChangeActionCreator = (newtext5) => ({
-  type: UPDATE_NEW_POST_TEXT,
-  newText: newtext5,
-});
+export const addhhPostActionCreator = (newPostText) => ({ type: ADD_POST, newPostText });
 export const setUserProfile = (profile) => ({
   type: SET_USER_PROFILE,
   profile,
