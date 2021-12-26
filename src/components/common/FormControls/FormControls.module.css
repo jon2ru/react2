@@ -3,5 +3,5 @@
 border: 5px red solid;
 }
 .formControl.error span{
-    border: 5px red solid;
+    color: red ;
 }
