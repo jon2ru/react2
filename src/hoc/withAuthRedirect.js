@@ -12,6 +12,7 @@ export const withAuthRedirect = (Component) => {
         render() {
             if (!this.props.isAuth) return <Redirect to={"/login"} />;
             //редирект если не залогинен
+          //пробовал свои мысли  if(this.props.dialogPages) alert("диалог");
             return <Component {...this.props} />
         }
     }

@@ -54,11 +54,10 @@ export const loginApi={
   me(){
     return instance.get(`auth/me`)
   },
- /* login(Login){
-    return instance.post(`/auth/login`)
+ login(email,password,rememberMe=false /*если не будет rememberMe*/){
+    return instance.post(`auth/login`,{email,password,rememberMe});
  },
- logout(Login){
-    return instance.delete(`/auth/login`)
+ logout(){
+    return instance.delete(`auth/login`);
  }
- */
 }

@@ -21,14 +21,37 @@ const authReduser = (state = initialState, action) => {
       return state;
   }
 };
-export const setAuthUserData = (email,login,id) => ({ type: SET_USER_DATA, data:{email,login,id} });
+export const setAuthUserData = (email,login,id,isAuth) => ({ type: SET_USER_DATA, data:{email,login,id,isAuth} });
 export const getAuthDataUser =()=>{
   return (dispatch)=>{
     loginApi.me()
     .then((response) => {
       if (response.data.resultCode === 0) {
         let {email,login,id} = response.data.data;
-        dispatch(setAuthUserData(email,login,id));
+        dispatch(setAuthUserData(email,login,id,true));
+      }
+    });
+}
+}
+export const login =(email,password,rememberMe)=>{
+  //login с маленькой
+  return (dispatch)=>{
+    loginApi.login(email,password,rememberMe)
+    .then((response) => {
+      if (response.data.resultCode === 0) {
+        dispatch(getAuthDataUser());
+      }
+    });
+}
+}
+export const logout =()=>{
+  //logout с маленькой
+  return (dispatch)=>{
+    loginApi.logout()
+    .then((response) => {
+      if (response.data.resultCode === 0) {
+      dispatch(setAuthUserData(null,null,null,false));
+      //вылогинились и зачищаеи пароль почта id isAuth
       }
     });
 }
