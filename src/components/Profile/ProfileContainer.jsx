@@ -13,7 +13,7 @@ class ProfileContainer extends React.Component {
     /*когда вызывается withRouter из url метод match возвращает params-userId
     и получаю id юзера*/
     if (!userIdd) {
-      userIdd = 20104;
+      userIdd = this.props.authorizedUserId;
     }
     this.props.profilesData(userIdd);
     this.props.getStatus(userIdd);
@@ -28,6 +28,8 @@ class ProfileContainer extends React.Component {
 let mapStateToProps = (state) => ({
   profile: state.profilePage.profile,
   status: state.profilePage.status,
+  authorizedUserId:state.auth.id,
+  isAuth:state.auth.isAuth,
 });
 export default compose(
   connect(mapStateToProps, { profilesData, getStatus, updateUserStatus }),

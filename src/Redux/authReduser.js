@@ -1,3 +1,4 @@
+import { stopSubmit } from "redux-form";
 import { loginApi } from "../api/api";
 
 const SET_USER_DATA = "SET_USER_DATA";
@@ -15,7 +16,7 @@ const authReduser = (state = initialState, action) => {
       return {
         ...state,
         ...action.data,
-        isAuth: true,
+        //isAuth: true,
       };
     default:
       return state;
@@ -40,6 +41,12 @@ export const login =(email,password,rememberMe)=>{
     .then((response) => {
       if (response.data.resultCode === 0) {
         dispatch(getAuthDataUser());
+      }
+      //79 ещё, если неправильно введены пароль или email то:
+      else {
+        let message=response.data.messages.length>0?response.data.messages[0]:
+         "Неправильный логин или пароль";
+        dispatch(stopSubmit("login",{_error: message}));
       }
     });
 }
