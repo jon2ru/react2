@@ -6,7 +6,17 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import QplOogin from "./components/Login/Login";
-function App(props) {
+import React from "react";
+import {getAuthDataUser} from "./Redux/authReduser";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { compose } from "redux";
+class App extends React.Component {
+  componentDidMount() {
+    this.props.getAuthDataUser();
+  } //END componentDidMount
+  render()
+  {
   return (
     <div className="App">
       <HeaderContainer />
@@ -28,6 +38,9 @@ function App(props) {
       </div>
     </div>
   );
-}
+}}
 
-export default App;
+export default compose(withRouter, 
+  connect(null, {getAuthDataUser }))(App);
+/*   когда connect(им) компоненту сбивается роут поэтому добавлен withRouter
+  ,но вроде уже пофиксили эту ошибку и можно не добавлять */
