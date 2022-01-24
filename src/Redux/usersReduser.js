@@ -100,6 +100,8 @@ export const toggleFollowInProgress = (isFetching, userId) => ({
 export const getUserThunkCreator = (currentPage, pageSize) => {
   return (dispatch) => {
     dispatch(toggleIsFetching(true));
+    //внизу выделяю жирным цифру страница users
+    dispatch(setcurrentpage(currentPage));
     usersApi
       .getUsera(currentPage, pageSize)
       //запрос на сервер данные на api.js урок 63, 7:00

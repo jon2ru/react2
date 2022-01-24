@@ -7,16 +7,20 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import QplOogin from "./components/Login/Login";
 import React from "react";
-import {getAuthDataUser} from "./Redux/authReduser";
+import {initializeApp} from "./Redux/app-Reduser";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
+import Preloader from "./components/common/Preloader/Preloader";
 class App extends React.Component {
   componentDidMount() {
-    this.props.getAuthDataUser();
+    this.props.initializeApp();
   } //END componentDidMount
   render()
-  {
+  { 
+    if(!this.props.initialized){
+     return <Preloader/>
+    }
   return (
     <div className="App">
       <HeaderContainer />
@@ -39,8 +43,10 @@ class App extends React.Component {
     </div>
   );
 }}
-
+const mapStateToProps = (state) => ({
+  initialized: state.app.initialized
+});
 export default compose(withRouter, 
-  connect(null, {getAuthDataUser }))(App);
+  connect(mapStateToProps, {initializeApp }))(App);
 /*   когда connect(им) компоненту сбивается роут поэтому добавлен withRouter
   ,но вроде уже пофиксили эту ошибку и можно не добавлять */

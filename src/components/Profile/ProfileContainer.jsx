@@ -15,6 +15,12 @@ class ProfileContainer extends React.Component {
     if (!userIdd) {
       userIdd = this.props.authorizedUserId;
     }
+   /*  if (!userIdd) {
+      this.props.history.push("/login");
+      когда жму кнопку вылогиниться нужно уйти из профиля,
+      но вроде и так срабатывает withAuthRedirect,
+       а это "програмный" редирект
+    } */
     this.props.profilesData(userIdd);
     this.props.getStatus(userIdd);
     //вызываю thunk из редюсера
@@ -23,13 +29,13 @@ class ProfileContainer extends React.Component {
     return <Profile {...this.props} status={this.props.status}
       updateUserStatus={this.props.updateUserStatus}
       profile={this.props.profile}/*profile={this.props.profile} -был заккоментирован*/ />;
-           }
+  }
 } //end ProfileContainer
 let mapStateToProps = (state) => ({
   profile: state.profilePage.profile,
   status: state.profilePage.status,
-  authorizedUserId:state.auth.id,
-  isAuth:state.auth.isAuth,
+  authorizedUserId: state.auth.id,
+  isAuth: state.auth.isAuth,
 });
 export default compose(
   connect(mapStateToProps, { profilesData, getStatus, updateUserStatus }),

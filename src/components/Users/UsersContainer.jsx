@@ -7,9 +7,9 @@ import {
   toggleFollowInProgress,
   getUserThunkCreator
 } from "../../Redux/usersReduser";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
-let mapStateToProps = (state) => {
+import { getCurrentPage, getFollowingInProgress, getIsFetching, getPageSize, getTotalUsersCount, getUsers } from "../../Redux/users-selectors";
+/* let mapStateToProps = (state) => {
   return {
     users: state.usersPage.users,
     pageSize: state.usersPage.pageSize,
@@ -17,6 +17,16 @@ let mapStateToProps = (state) => {
     currentPage: state.usersPage.currentPage,
     isFetching: state.usersPage.isFetching,
     followingInProgress: state.usersPage.followingInProgress,
+    };
+}; */
+let mapStateToProps = (state) => {
+  return {
+    users: getUsers(state),
+    pageSize: getPageSize(state),
+    totalUsersCount: getTotalUsersCount(state),
+    currentPage: getCurrentPage(state),
+    isFetching: getIsFetching(state),
+    followingInProgress: getFollowingInProgress(state),
     };
 };
 
@@ -44,7 +54,7 @@ let mapStateToProps = (state) => {
 };
 
  урок 58 убрал mapDispatchToProps*/
-const UsersContainer = compose( withAuthRedirect,
+const UsersContainer = compose(
     connect(
     mapStateToProps,{follow,unfollow,setcurrentpage,
       toggleFollowInProgress,

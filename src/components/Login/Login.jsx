@@ -52,7 +52,7 @@ const Login2 = (props) => {
   }
   if (props.isAuth) {
     return <Redirect to={'/profile'}/>
-  }
+  } 
   return <div>
     <h1>LOGIN</h1>
     <LoginReduxForm onSubmit={aonSubmit} />
