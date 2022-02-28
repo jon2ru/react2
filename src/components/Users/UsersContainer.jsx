@@ -8,7 +8,9 @@ import {
   getUserThunkCreator
 } from "../../Redux/usersReduser";
 import {compose} from "redux";
-import { getCurrentPage, getFollowingInProgress, getIsFetching, getPageSize, getTotalUsersCount, getUsers } from "../../Redux/users-selectors";
+import { getCurrentPage, getFollowingInProgress, getIsFetching, 
+  getPageSize, getTotalUsersCount, getUserSuperSelector
+ } from "../../Redux/users-selectors";
 /* let mapStateToProps = (state) => {
   return {
     users: state.usersPage.users,
@@ -21,7 +23,8 @@ import { getCurrentPage, getFollowingInProgress, getIsFetching, getPageSize, get
 }; */
 let mapStateToProps = (state) => {
   return {
-    users: getUsers(state),
+    users: getUserSuperSelector(state),
+    // users: getUsers(state),
     pageSize: getPageSize(state),
     totalUsersCount: getTotalUsersCount(state),
     currentPage: getCurrentPage(state),
