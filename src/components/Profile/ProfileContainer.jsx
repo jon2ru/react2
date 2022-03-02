@@ -40,7 +40,8 @@ let mapStateToProps = (state) => ({
 export default compose(
   connect(mapStateToProps, { profilesData, getStatus, updateUserStatus }),
   withAuthRedirect,
-  //withRouter получаю из url нужнцю часть
+  //withRouter получаю из url нужную часть
   withRouter
 )(ProfileContainer);
-//возьми ProfileContainer и закинь его в withRouter--> withAuthRedirect,а потом результат в connect(mapStateToProps...
+//возьми ProfileContainer и закинь его в withRouter--> withAuthRedirect,а 
+// потом результат в connect(mapStateToProps...
