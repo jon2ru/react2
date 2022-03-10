@@ -6,8 +6,9 @@ import { input } from "../common/FormControls/FormControls";
 import { login } from "../../Redux/authReduser";
 import { Redirect } from "react-router-dom";
 import styles from "../common/FormControls/FormControls.module.css";
-const LoginForm = (props) => {
-  return <form onSubmit={props.handleSubmit}>
+const LoginForm = (handleSubmit,error) => {
+  // убрал слово props
+  return <form onSubmit={handleSubmit}>
     <div>
       <Field placeholder={"email"} name={"email"} component={input}
         validate={[required]} />
@@ -19,8 +20,8 @@ const LoginForm = (props) => {
     <div>
       <Field type={"checkbox"} name={"rememberMe"} component={input} />remember me
     </div>
-    {props.error&&<div className={styles.formSummaryError}>
-     {props.error}
+    {error&&<div className={styles.formSummaryError}>
+     {error}
     </div>}
     <div>
       <button>Login</button>

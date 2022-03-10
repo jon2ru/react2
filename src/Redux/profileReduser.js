@@ -54,31 +54,34 @@ export const getuStatus = (status) => ({
 });
 
 //thunk
-export const profilesData = (userIdd) => {
-  return (dispatch) => {
-    profileApi.getProfileApi(userIdd).then((response) => {
+export const profilesData = (userIdd) => async(dispatch) =>{
+  // return (dispatch) => {
+   let response=await profileApi.getProfileApi(userIdd)
+    // .then((response) => {
       //запрос в api.js
       dispatch(setUserProfile(response.data));
-    });
-  }
+  //   });
+  // }
 }
-export const getStatus = (userIdd) => {
-  return (dispatch) => {
-    profileApi.getUserStatus(userIdd).then((response) => {
+export const getStatus = (userIdd) =>async(dispatch) => {
+  // return (dispatch) => {
+    let response=await profileApi.getUserStatus(userIdd)
+    // .then((response) => {
       //запрос в api.js получить статус
       dispatch(getuStatus(response.data));
-    });
-  }
+  //   });
+  // }
 }
-export const updateUserStatus = (status) => {
-  return (dispatch) => {
-    profileApi.updateStatus(status).then((response) => {
+export const updateUserStatus = (status) =>async(dispatch) => {
+  // return (dispatch) => {
+    let response=await profileApi.updateStatus(status)
+    // .then((response) => {
       //запрос в api.js установить статус
       if (response.data.resultCode === 0) {
         dispatch(getuStatus(status));
       }
       //вызывается тот же экшн креатор ,что и выше  и обновляется status
-    });
-  }
+  //   });
+  // }
 }
 export default profileReduser;

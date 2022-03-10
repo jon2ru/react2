@@ -6,8 +6,10 @@ import { maxLengthCreator, required } from "../../../utils/validator/validators"
 import { input } from "../../common/FormControls/FormControls";
 // console.log(MyPosts);
 const maxLength10=maxLengthCreator(10);
-const MyPosts = (props) => {
-
+const MyPosts =React.memo(props => {
+  // React.memo если пропсы не поменялись.то не рендерь
+  console.log('RENDER');
+  console.log(props);
   let postElement = props.post.map((p) => (
     <Post message={p.message} count={p.count} />
   ));
@@ -38,7 +40,7 @@ const MyPosts = (props) => {
       <div className={classes.newpost}>{postElement}</div>
     </div>
   );
-};
+});
 const myPostForm= (props) => {
   return(
   <form onSubmit={props.handleSubmit}>

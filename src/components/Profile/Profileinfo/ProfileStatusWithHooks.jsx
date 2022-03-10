@@ -1,5 +1,6 @@
 import classes from "./Profileinfo.module.css"
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+// import { useEffect } from "react";
 
 const ProfileStatusWithHooks= (props) =>{
    let [editMode,setEditMode]= useState(false)
@@ -9,6 +10,11 @@ const ProfileStatusWithHooks= (props) =>{
 // которая меняет это значение(1-editMode,2-setEditMode)
 let [status,setStatus]= useState(props.status)
 // раздробил локальный стейт на 2 части
+useEffect( ()=>{
+    setStatus=(props.status);
+},[props.status])
+// зависишь от [props.status] если он поменялся то отрисуй
+// useEffect срабатывает после отрисовки компоненты
 const activateEditMode = () => {
   setEditMode(true)
 }

@@ -23,22 +23,22 @@ const authReduser = (state = initialState, action) => {
   }
 };
 export const setAuthUserData = (email,login,id,isAuth) => ({ type: SET_USER_DATA, data:{email,login,id,isAuth} });
-export const getAuthDataUser =()=>{
-  return (dispatch)=>{
-    loginApi.me()
-    .then((response) => {
+export const getAuthDataUser =()=>async(dispatch)=>{
+  // return (dispatch)=>{
+   let response=await loginApi.me()
+    // .then((response) => {
       if (response.data.resultCode === 0) {
         let {email,login,id} = response.data.data;
         dispatch(setAuthUserData(email,login,id,true));
       }
-    });
+    // });
+// }
 }
-}
-export const login =(email,password,rememberMe)=>{
+export const login =(email,password,rememberMe)=>async(dispatch) =>{
   //login с маленькой
-  return (dispatch)=>{
-    loginApi.login(email,password,rememberMe)
-    .then((response) => {
+  // return (dispatch)=>{
+   let response=await loginApi.login(email,password,rememberMe)
+    // .then((response) => {
       if (response.data.resultCode === 0) {
         dispatch(getAuthDataUser());
       }
@@ -47,20 +47,20 @@ export const login =(email,password,rememberMe)=>{
         let message=response.data.messages.length>0?response.data.messages[0]:
          "Неправильный логин или пароль";
         dispatch(stopSubmit("login",{_error: message}));
-      }
-    });
+      // }
+    // });
 }
 }
-export const logout =()=>{
+export const logout =()=>async(dispatch)=>{
   //logout с маленькой
-  return (dispatch)=>{
-    loginApi.logout()
-    .then((response) => {
+  // return (dispatch)=>{
+   let response=await loginApi.logout()
+    // .then((response) => {
       if (response.data.resultCode === 0) {
       dispatch(setAuthUserData(null,null,null,false));
       //вылогинились и зачищаеи пароль почта id isAuth
       }
-    });
-}
+//     });
+// }
 }
 export default authReduser;

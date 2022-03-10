@@ -1,6 +1,11 @@
 import classes from "./Profileinfo.module.css"
 import React from "react";
-
+//  отключен
+//  отключен
+//  отключен
+//  отключен
+//  отключен
+//  отключен
 class ProfileStatus extends React.Component {
     state = {
         editMode: true,
