@@ -1,30 +1,46 @@
-import React from "react";
+import React,{useState} from "react";
 import styles from "./Paginator.module.css"
+import cn from "classnames";
 
-let Pagination = (props) => {
-  let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+let Pagination = ({totalItemsCount,pageSize, currentPage,onPageChanged, portionSize=10}) => {
+  let pagesCount = Math.ceil(totalItemsCount /pageSize);
   //страниц=сколько всего юзеров/сколько показывать юзеров
   let pages = [];
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
   } //end for
-  return (
-    <div>
-      {pages.map((p) => {
+  let portionCount=Math.ceil(pagesCount/portionSize)
+  let [portionNumber,setPortionNumber]=useState(1);
+  // useState-хук со старта порция 1 и 
+  // функция setPortionNumber которая меняет номер порции
+  let leftPortionPageNumber=(portionNumber-1)*portionSize+1
+  let rightPortionPageNumber=portionNumber*portionSize
+  return <div className={styles.paginator}>
+{/* ниже показывай кнопку  PREV если portionNumber > 1 */}
+  {portionNumber > 1 &&
+  <button onClick={() =>{
+    setPortionNumber(portionNumber-1)
+  }}>PREV</button>}
+   {pages
+    .filter(p=> p>= leftPortionPageNumber&& p <= rightPortionPageNumber)
+    .map((p) => {
         return (
           <span
-            className={props.currentPage === p && styles.selectedPage}
+            className={currentPage === p && styles.pageNumber.selectedPage}
             //currentPage=выделяю жирным текущую страницу
             onClick={() => {
-              props.onPageChanged(p);
+              onPageChanged(p);
             }}
           >
             {p}
           </span>
         );
-      })}
+ } )}
+ {portionCount >portionNumber&& <button onClick={() =>{
+   setPortionNumber(portionNumber+1)
+ }}>NEXT</button>}
     </div>
-  )
+  
 };
 //end Pagination
 export default Pagination;
