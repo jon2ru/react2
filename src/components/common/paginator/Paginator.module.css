@@ -1,11 +1,20 @@
+.selectedPage{
+    font-weight: bold;
+}
 .paginator{
     margin: 10px;
+    /* Устанавливает величину отступа от каждого края элемента */
 }
 .pageNumber{
     padding: 2px;
-    border: 1px solid gray;
+    /* Устанавливает значение полей вокруг содержимого элемента */
+    /* отступ от рамки до текста */
+    border: 1px solid grey;
+    /* толщина, стиль и цвет границы вокруг элемента */
 }
 .pageNumber.selectedPage{
     font-weight: bold;
+    /*bold- жирность */
+    /*font-weight- Насыщенность шрифта */
     border-color: black;
 }
