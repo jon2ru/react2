@@ -31,33 +31,42 @@ export const usersApi = {
       `follow/${userId}`
     );
   },
-  getProfileApi(userIdd){
+  getProfileApi(userIdd) {
     console.warn('Obsolete method. Please profileApi object.');
     return profileApi.getProfileApi(userIdd)
   }
 };
 
 export const profileApi = {
-  getProfileApi(userIdd){
-    return instance.get(`profile/`+userIdd)
+  getProfileApi(userIdd) {
+    return instance.get(`profile/` + userIdd)
   },
   //получил : ищу работу... фото и др.
-  getUserStatus(userIdd){
-    return instance.get(`profile/status/`+userIdd)
+  getUserStatus(userIdd) {
+    return instance.get(`profile/status/` + userIdd)
   },
-  updateStatus(status){
-    return instance.put(`profile/status/`,{status:status})
+  updateStatus(status) {
+    return instance.put(`profile/status/`, { status: status })
   },
   // отправляю на сервер объект -> status:status
-  };
-export const loginApi={
-  me(){
+  savePhoto(photoFile) {
+    let formData = new FormData();
+    formData.append("image", photoFile);
+    return instance.put(`profile/photo`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+  }
+};
+export const loginApi = {
+  me() {
     return instance.get(`auth/me`)
   },
- login(email,password,rememberMe=false /*если не будет rememberMe*/){
-    return instance.post(`auth/login`,{email,password,rememberMe});
- },
- logout(){
+  login(email, password, rememberMe = false /*если не будет rememberMe*/) {
+    return instance.post(`auth/login`, { email, password, rememberMe });
+  },
+  logout() {
     return instance.delete(`auth/login`);
- }
+  }
 }

@@ -1,6 +1,9 @@
 .selectedPage{
     font-weight: bold;
 }
+.button {
+    font-size: 18px;
+}
 .paginator{
     margin: 10px;
     /* Устанавливает величину отступа от каждого края элемента */

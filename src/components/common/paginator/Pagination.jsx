@@ -20,7 +20,7 @@ let Pagination = ({totalItemsCount,pageSize, currentPage,onPageChanged,
   return <div className={styles.paginator}>
 {/* ниже показывай кнопку  PREV если portionNumber > 1 */}
   {portionNumber > 1 &&
-  <button onClick={() =>{
+  <button className={styles.button} onClick={() =>{
     setPortionNumber(portionNumber-1)
   }}>PREV</button>}
    {pages
@@ -48,7 +48,7 @@ let Pagination = ({totalItemsCount,pageSize, currentPage,onPageChanged,
              >{p}</span>
         );
  } )}
- {portionCount >portionNumber&& <button onClick={() =>{
+ {portionCount >portionNumber&& <button className={styles.button} onClick={() =>{
    setPortionNumber(portionNumber+1)
  }}>NEXT</button>}
     </div>

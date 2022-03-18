@@ -6,3 +6,6 @@
   width: 800px;
   height: 400px;
 }  */ 
+.avatar {
+max-width: 200px;
+}

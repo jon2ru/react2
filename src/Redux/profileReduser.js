@@ -1,7 +1,8 @@
-import { profileApi } from "../api/api";
+import { loginApi, profileApi } from "../api/api";
 const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const GET_STATUS = "GET_STATUS";
+const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS";
 let initialState = {
   post: [
     { id: 1, message: "Как дела", count: 2 },
@@ -39,6 +40,12 @@ const profileReduser = (state = initialState, action) => {
         ...state,
         status: action.status,
       };
+    case SAVE_PHOTO_SUCCESS:
+      return {
+        ...state,
+        profile: { ...state.profile,
+        photos: action.photos}
+      };
     default:
       return state;
   }
@@ -52,7 +59,10 @@ export const getuStatus = (status) => ({
   type: GET_STATUS,
   status,
 });
-
+export const savePhotoSuccess = (photos) => ({
+  type: SAVE_PHOTO_SUCCESS,
+  photos,
+});
 //thunk
 export const profilesData = (userIdd) => async(dispatch) =>{
   // return (dispatch) => {
@@ -83,5 +93,13 @@ export const updateUserStatus = (status) =>async(dispatch) => {
       //вызывается тот же экшн креатор ,что и выше  и обновляется status
   //   });
   // }
+}
+export const savePhoto = (file) =>async(dispatch) => {
+  // return (dispatch) => {
+    let response=await profileApi.savePhoto(file)
+      //запрос в api.js 
+      if (response.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(response.data.data.photos));
+      }
 }
 export default profileReduser;

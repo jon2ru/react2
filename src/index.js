@@ -10,7 +10,8 @@ import { BrowserRouter } from "react-router-dom";
 //let rerenderEntireTree = (state) => {
   ReactDOM.render(
   //  <React.StrictMode>
-      <BrowserRouter>
+  <BrowserRouter >
+  {/* <BrowserRouterbasename={process.env.PUBLIC_URL}> */}
     <Provider store={store}>
       <App
        /*
