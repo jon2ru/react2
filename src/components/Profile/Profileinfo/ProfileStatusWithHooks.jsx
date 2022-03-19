@@ -29,7 +29,7 @@ const onStatusChange = (e) => {
             return (
             <div>{!editMode&&//если editMode в стейте=false ,то...
                 <div>
-                    <span onDoubleClick={activateEditMode}>{props.status ||"no status"}</span>
+                   <b>status:</b> <span onDoubleClick={activateEditMode}>{props.status ||"no status"}</span>
                 </div>
             }
                 {editMode &&

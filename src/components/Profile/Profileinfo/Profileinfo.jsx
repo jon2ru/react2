@@ -5,11 +5,11 @@ import ProfileStatus from "./ProfileStatus"
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userPhoto from "./../../../assets/images/users.png";
 const Profileinfo = (props) => {
-  if (!props.profile){
+  if (!props.profile) {
     return <Preloader />
   }
-  const onMainPhotoSelected =(e)=>{
-    if(e.target.files.length){
+  const onMainPhotoSelected = (e) => {
+    if (e.target.files.length) {
       // если фото имеет длинну-не пустая
       props.savePhoto(e.target.files[0])
       // то возьми это фото
@@ -18,22 +18,46 @@ const Profileinfo = (props) => {
   }
   return (
     <div>
-      <img src="https://i.pinimg.com/originals/f5/39/b6/f539b6967cb0f250d4e05cc133a8c87d.jpg" width="800" height="400"/>
+      <img src="https://i.pinimg.com/originals/f5/39/b6/f539b6967cb0f250d4e05cc133a8c87d.jpg" width="800" height="400" />
       {/* пляж */}
-      <div className={classes.descr}></div>
-      <img src={props.profile.photos.large||userPhoto} className={classes.avatar}/>
-      {props.isOwner &&<input type="file" onChange={onMainPhotoSelected}/>}
-      {/* если есть isOwner покажи кнопку с выбором файла */}
-      <ProfileStatusWithHooks status={props.status}
-      updateUserStatus={props.updateUserStatus}/>
-      <div>avat+descr</div>
-      <div>Имя:{props.profile.fullName}</div>
-      <div>обо мне: {props.profile.aboutMe}</div>
-      <div>ищешь работу?{props.profile.lookingForAJob== false ? 'Да': 'Нет'}</div>
-      <div>
-        какую хочешь работу? {props.profile.lookingForAJobDescription}
-        </div>
+      <div className={classes.descr}>
+        <img src={props.profile.photos.large || userPhoto} className={classes.avatar} />
+        {props.isOwner && <input type="file" onChange={onMainPhotoSelected} />}
+        {/* если есть isOwner покажи кнопку с выбором файла */}
+        <ProfileData profile={props.profile} />
+        <ProfileStatusWithHooks status={props.status}
+          updateUserStatus={props.updateUserStatus} />
+      </div>
     </div>
   );
-};
+}
+const ProfileData = ({ profile }) => {
+  return <div>
+    <div>avat+descr</div>
+    <div>Имя:{profile.fullName}</div>
+    <div>обо мне: {profile.aboutMe}</div>
+    <div>ищешь работу?{profile.lookingForAJob == false ? 'Да' : 'Нет'}</div>
+    <div>
+      какую хочешь работу? {profile.lookingForAJobDescription}
+    </div>
+    <div>
+      контакты:{Object.keys(profile.contacts).map(key => {
+        // Object.keys(obj) – возвращает массив ключей.
+        return <Contacts key={key} contactTitle={key} contactValue={profile.contacts[key]} />
+        // contactValue  пример: let abv={
+        //  github: qwerty
+        //     vk: trytry
+        //     facebook: popop}
+        //     abv[facebook] вернет popop
+        // key={key} зачем не понял
+      })}
+    </div>
+  </div>
+}
+const Contacts = ({ contactTitle, contactValue }) => {
+  return <div className={classes.contact}>
+    {contactTitle}:{contactValue}
+  </div>
+}
+
 export default Profileinfo;

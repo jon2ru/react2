@@ -36,7 +36,7 @@ export const usersApi = {
     return profileApi.getProfileApi(userIdd)
   }
 };
-
+// *******************************
 export const profileApi = {
   getProfileApi(userIdd) {
     return instance.get(`profile/` + userIdd)
