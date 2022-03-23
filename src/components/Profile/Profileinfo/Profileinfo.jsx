@@ -4,7 +4,14 @@ import classes from "./Profileinfo.module.css"
 import ProfileStatus from "./ProfileStatus"
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userPhoto from "./../../../assets/images/users.png";
+import { useState } from "react";
+import ProfileDataForm from "./ProfileDataForm";
 const Profileinfo = (props) => {
+  let [editMode,setEditMode]= useState(false)
+//    деструктуризация массива
+//    useState сидит в библиотеке react
+//useState возвращает первым номером значение и 2м ф. 
+// которая меняет это значение(1-editMode,2-setEditMode)
   if (!props.profile) {
     return <Preloader />
   }
@@ -24,15 +31,19 @@ const Profileinfo = (props) => {
         <img src={props.profile.photos.large || userPhoto} className={classes.avatar} />
         {props.isOwner && <input type="file" onChange={onMainPhotoSelected} />}
         {/* если есть isOwner покажи кнопку с выбором файла */}
-        <ProfileData profile={props.profile} />
+       {editMode?
+       <ProfileDataForm profile={props.profile} />:
+       <ProfileData goToEditMode={()=>{setEditMode(true)}} isOwner={props.isOwner} profile={props.profile} />}
+        {/* тринарное выражение на верху */}
         <ProfileStatusWithHooks status={props.status}
           updateUserStatus={props.updateUserStatus} />
       </div>
     </div>
   );
 }
-const ProfileData = ({ profile }) => {
+const ProfileData = ({ profile,isOwner,goToEditMode }) => {
   return <div>
+    {isOwner&&<div><button onClick={goToEditMode}>edit</button></div>}
     <div>avat+descr</div>
     <div>Имя:{profile.fullName}</div>
     <div>обо мне: {profile.aboutMe}</div>

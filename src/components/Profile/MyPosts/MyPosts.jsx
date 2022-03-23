@@ -8,8 +8,6 @@ import { input } from "../../common/FormControls/FormControls";
 const maxLength10=maxLengthCreator(10);
 const MyPosts =React.memo(props => {
   // React.memo если пропсы не поменялись.то не рендерь
-  console.log('RENDER');
-  console.log(props);
   let postElement = props.post.map((p) => (
     <Post message={p.message} count={p.count} />
   ));
@@ -23,14 +21,14 @@ const MyPosts =React.memo(props => {
     /* props.updatenewPost('');обнуляю значение в textarea 
     -перенес в state.js */
   };
-  let onPostChange = () => {
-    let newtext5 = newPostElement.current.value;
-    props.updateNewPostText(newtext5);
-    //let action=(onPostChangeActionCreator(newtext5))
-    //создал action для примера чтобы видеть процесс
-    //props.dispatch(action);
-    //при изменении в textarea передаю данные в state.js
-  };
+  // let onPostChange = () => {
+  //   let newtext5 = newPostElement.current.value;
+  //   props.updateNewPostText(newtext5);
+  //   //let action=(onPostChangeActionCreator(newtext5))
+  //   //создал action для примера чтобы видеть процесс
+  //   //props.dispatch(action);
+  //   //при изменении в textarea передаю данные в state.js
+  // };
   return (
     <div className={classes.post}>
       <h2>My Post</h2>
