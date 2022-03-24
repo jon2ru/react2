@@ -1,7 +1,7 @@
 import React from "react";
 import Profile from "./Profile";
 import { connect } from "react-redux";
-import { profilesData, getStatus, updateUserStatus,savePhoto } from "../../Redux/profileReduser";
+import { profilesData, getStatus, updateUserStatus,savePhoto,saveProfile } from "../../Redux/profileReduser";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
@@ -51,7 +51,7 @@ let mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth,
 });
 export default compose(
-  connect(mapStateToProps, { profilesData, getStatus, updateUserStatus,savePhoto}),
+  connect(mapStateToProps, { profilesData, getStatus, updateUserStatus,savePhoto,saveProfile}),
   withAuthRedirect,
   //withRouter получаю из url нужную часть
   withRouter

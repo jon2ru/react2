@@ -102,4 +102,12 @@ export const savePhoto = (file) =>async(dispatch) => {
         dispatch(savePhotoSuccess(response.data.data.photos));
       }
 }
+export const saveProfile = (profile) =>async(dispatch) => {
+  // return (dispatch) => {
+    let response=await profileApi.saveProfile(profile)
+      //запрос в api.js 
+      if (response.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(response.data.data.photos));
+      }
+}
 export default profileReduser;

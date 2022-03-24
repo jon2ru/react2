@@ -23,6 +23,9 @@ const Profileinfo = (props) => {
       console.log(props.savePhoto)
     }
   }
+  const onSubmit = (formData) => {
+        props.saveProfile(formData);
+    }
   return (
     <div>
       <img src="https://i.pinimg.com/originals/f5/39/b6/f539b6967cb0f250d4e05cc133a8c87d.jpg" width="800" height="400" />
@@ -32,7 +35,7 @@ const Profileinfo = (props) => {
         {props.isOwner && <input type="file" onChange={onMainPhotoSelected} />}
         {/* если есть isOwner покажи кнопку с выбором файла */}
        {editMode?
-       <ProfileDataForm profile={props.profile} />:
+       <ProfileDataForm initialValues={props.profile} onSubmit={onSubmit}/>:
        <ProfileData goToEditMode={()=>{setEditMode(true)}} isOwner={props.isOwner} profile={props.profile} />}
         {/* тринарное выражение на верху */}
         <ProfileStatusWithHooks status={props.status}
@@ -47,7 +50,7 @@ const ProfileData = ({ profile,isOwner,goToEditMode }) => {
     <div>avat+descr</div>
     <div>Имя:{profile.fullName}</div>
     <div>обо мне: {profile.aboutMe}</div>
-    <div>ищешь работу?{profile.lookingForAJob == false ? 'Да' : 'Нет'}</div>
+    <div>ищешь работу?{profile.lookingForAJob == true ? 'Да' : 'Нет'}</div>
     <div>
       какую хочешь работу? {profile.lookingForAJobDescription}
     </div>

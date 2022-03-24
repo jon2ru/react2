@@ -1,16 +1,16 @@
 import React from "react";
 import { reduxForm } from "redux-form";
 import { createField, textarea,input } from "../../common/FormControls/FormControls";
-const ProfileDataForm = ({ profile }) => {
-  return <form>
-    <div><button onClick={() => { }}>save</button></div>
+const ProfileDataForm = ({ handleSubmit }) => {
+  return <form onSubmit={handleSubmit}>
+    <div><button>save</button></div>
     <div>avat+descr</div>
     <div>Имя:{createField("Full name", "fullName", [], input)}</div>
     <div>обо мне:{createField("about me", "aboutMe", [], textarea)}</div>
     <div>ищешь работу?
     {createField("", "lookingForAJob", [], input,{type:"checkbox"})}</div>
     <div>
-      какую хочешь работу? {profile.lookingForAJobDescription}
+      какую хочешь работу? 
       {createField("Description", "lookingForAJobDescription", [], textarea)}
     </div>
     {/* <div>
