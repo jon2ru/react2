@@ -47,8 +47,7 @@ export const login = (email, password, rememberMe) => async (dispatch) => {
     let message = response.data.messages.length > 0 ? response.data.messages[0] :
       "Неправильный логин или пароль";
     dispatch(stopSubmit("login", { _error: message }));
-    // }
-    // });
+    
   }
 }
 export const logout = () => async (dispatch) => {

@@ -25,6 +25,7 @@ const Profileinfo = (props) => {
   }
   const onSubmit = (formData) => {
         props.saveProfile(formData);
+        // setEditMode(false);
     }
   return (
     <div>
@@ -35,7 +36,9 @@ const Profileinfo = (props) => {
         {props.isOwner && <input type="file" onChange={onMainPhotoSelected} />}
         {/* если есть isOwner покажи кнопку с выбором файла */}
        {editMode?
-       <ProfileDataForm initialValues={props.profile} onSubmit={onSubmit}/>:
+       <ProfileDataForm initialValues={props.profile} profile={props.profile} onSubmit={onSubmit}/>:
+      //  initialValues метод redux-form. При перезагрузке страницы ,
+      //  чтобы сохранялись в input и textarea введенные значения
        <ProfileData goToEditMode={()=>{setEditMode(true)}} isOwner={props.isOwner} profile={props.profile} />}
         {/* тринарное выражение на верху */}
         <ProfileStatusWithHooks status={props.status}

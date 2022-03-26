@@ -1,4 +1,5 @@
 import { profileApi } from "../api/api";
+import { stopSubmit } from "redux-form";
 const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const GET_STATUS = "GET_STATUS";
@@ -102,12 +103,17 @@ export const savePhoto = (file) =>async(dispatch) => {
         dispatch(savePhotoSuccess(response.data.data.photos));
       }
 }
-export const saveProfile = (profile) =>async(dispatch) => {
-  // return (dispatch) => {
+export const saveProfile = (profile) =>async(dispatch,getState) => {
+  const useruidi= getState().auth.id
+  // getState достал значение из глобального стейта 
     let response=await profileApi.saveProfile(profile)
-      //запрос в api.js 
+      //запрос в api.js .Сохранил изменения профиля на сервере 
       if (response.data.resultCode === 0) {
-        dispatch(savePhotoSuccess(response.data.data.photos));
+        dispatch(profilesData(useruidi));
+            //  обновил профиль
+      }
+      else{
+        dispatch(stopSubmit("edit-profile", { _error: response.data.messages[0] }));
       }
 }
 export default profileReduser;

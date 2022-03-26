@@ -9,7 +9,7 @@ const maxLength10=maxLengthCreator(10);
 const MyPosts =React.memo(props => {
   // React.memo если пропсы не поменялись.то не рендерь
   let postElement = props.post.map((p) => (
-    <Post message={p.message} count={p.count} />
+    <Post key={p.id} message={p.message} count={p.count} />
   ));
   let newPostElement = React.createRef(); /* 31 реакт создай ссылку*/
   let addhhPost = (values) => {
