@@ -24,8 +24,10 @@ const Profileinfo = (props) => {
     }
   }
   const onSubmit = (formData) => {
-        props.saveProfile(formData);
-        // setEditMode(false);
+        props.saveProfile(formData).then(()=>{
+         setEditMode(false);
+        });
+        // async await не сработал
     }
   return (
     <div>

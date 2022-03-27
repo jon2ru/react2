@@ -113,7 +113,11 @@ export const saveProfile = (profile) =>async(dispatch,getState) => {
             //  обновил профиль
       }
       else{
-        dispatch(stopSubmit("edit-profile", { _error: response.data.messages[0] }));
+        dispatch(stopSubmit("edit-profile", {"contacts":{ "facebook": response.data.messages[0]} }));
+        // contacts- объект facebook-ключ в объекте.
+        //  Надо распарсить строку и сделать для всех input
+        return Promise.reject(response.data.messages[0])
+        // разобраться с reject что это и как
       }
 }
 export default profileReduser;
