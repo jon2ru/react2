@@ -7,12 +7,16 @@ import { login } from "../../Redux/authReduser";
 import { Redirect } from "react-router-dom";
 import styles from "../common/FormControls/FormControls.module.css";
 import {createField} from "../common/FormControls/FormControls";
-const LoginForm = ({handleSubmit,error}) => {
+const LoginForm = ({handleSubmit,error,capchaUrl}) => {
   // убрал слово props
   return <form onSubmit={handleSubmit}>
     {createField("Email","email",[required],input,)}
     {createField("Password","password",[required],input,{type:"password"})}
     {createField(null,"rememberMe",[],input,{type:"checkbox"},"remember me")}
+    {/* ниже капча */}
+    {capchaUrl&&<img src={capchaUrl}/>}
+    {capchaUrl&&createField("Введите капчу","captcha",[required],input,{})}
+
     {error&&<div className={styles.formSummaryError}>
      {error}
     </div>}
@@ -28,7 +32,7 @@ const LoginReduxForm = reduxForm({ form: "login" })(LoginForm);
 const Login2 = (props) => {
   const aonSubmit = (formData) => {
     //75 урок 32:00 formData значение из reduxForm->handleSubmit
-    props.login(formData.email, formData.password, formData.rememberMe);
+    props.login(formData.email, formData.password, formData.rememberMe, formData.captcha);
     //login с маленькой
     //78 18:40 логинизация
     //console.log(formData);
@@ -49,11 +53,12 @@ const Login2 = (props) => {
   } 
   return <div>
     <h1>LOGIN</h1>
-    <LoginReduxForm onSubmit={aonSubmit} />
+    <LoginReduxForm onSubmit={aonSubmit} capchaUrl={props.capchaUrl}/>
   </div>
 };
 const mapStateToProps=(state)=>({
-  isAuth:state.auth.isAuth
+  isAuth:state.auth.isAuth,
+  capchaUrl:state.auth.capchaUrl
 })
 export default connect(mapStateToProps, {login})(Login2);
 //login приходит из authReduser login с маленькой

@@ -117,7 +117,6 @@ export const saveProfile = (profile) =>async(dispatch,getState) => {
         // contacts- объект facebook-ключ в объекте.
         //  Надо распарсить строку и сделать для всех input
         return Promise.reject(response.data.messages[0])
-        // разобраться с reject что это и как
       }
 }
 export default profileReduser;
