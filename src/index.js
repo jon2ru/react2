@@ -5,13 +5,14 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import {Provider} from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 
 //let rerenderEntireTree = (state) => {
   ReactDOM.render(
   //  <React.StrictMode>
-  <BrowserRouter >
-  {/* <BrowserRouterbasename={process.env.PUBLIC_URL}> */}
+  // <HashRouter > был BrowserRouter
+  <HashRouter basename={process.env.PUBLIC_URL}>
+    {/* чтобы путь работал и в git */}
     <Provider store={store}>
       <App
        /*
@@ -21,7 +22,7 @@ import { BrowserRouter } from "react-router-dom";
         */
       />
       </Provider>
-    </BrowserRouter>,
+    </HashRouter>,
  /*   </React.StrictMode>,*/
     document.getElementById("root")
   ); 

@@ -32,6 +32,7 @@ class ProfileContainer extends React.Component {
     if (this.props.match.params.userId !=prevProps.match.params.userId){
       this.refreshProfile();
     }
+    // match из withRouter
     // чтобы с чужого профиля переходить на свой при нажатии на profile
   }
   render() {
