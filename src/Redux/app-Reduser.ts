@@ -1,27 +1,32 @@
-import { stopSubmit } from "redux-form";
-import { loginApi } from "../api/api";
 import { getAuthDataUser } from "./authReduser";
 
 const INITIALIZED_SUCCESS = "INITIALIZED_SUCCESS";
-
-let initialState = {
+// ******************************
+export type initialStateType = {
+  initialized: boolean,
+};
+let initialState:initialStateType = {
   initialized: false,
 };
 //начальный state
-const appReduser = (state = initialState, action) => {
+// ******************************
+const appReduser = (state = initialState, action:any):initialStateType => {
   switch (action.type) {
     case INITIALIZED_SUCCESS:
       return {
         ...state,
-        initialized: true,
+        initialized: true
       };
     default:
       return state;
   }
 };
-export const initializedSuccess = () => ({ type: INITIALIZED_SUCCESS });
+type initializedSuccessActionType={
+  type:typeof INITIALIZED_SUCCESS//"INITIALIZED_SUCCESS"
+}
+export const initializedSuccess = ():initializedSuccessActionType => ({ type: INITIALIZED_SUCCESS });
 export const initializeApp = () => {
-  return (dispatch) => {
+  return (dispatch:any) => {
     let promise = dispatch(getAuthDataUser());//dispatch возвращает что-то
     // let promise = dispatch(что-то диспачу если ещё и внизу соберу все промисы());
    Promise.all ([promise]).then(() => {
