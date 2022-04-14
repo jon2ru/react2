@@ -1,4 +1,15 @@
 const ADD_NEW_DIALOG = "ADD-NEW-DIALOG";
+type dialogType={
+  id:number
+  nname:string
+  img:any,
+    src:string
+}
+type messageType={
+  id:number
+  message:string
+}
+
 let initialState = {
   dialogs2: [
     {
@@ -30,15 +41,16 @@ let initialState = {
         <img src="http://pngimg.com/uploads/spongebob/spongebob_PNG8.png" />
       ),
     },
-  ],
+  ] as Array<dialogType>,
   //newDialog: "",
   messages2: [
     { id: 1, message: "привет" },
     { id: 2, message: "позвони мне" },
     { id: 3, message: "напиши номер" },
-  ],
+  ]as Array<messageType>
 };
-const dialogReduser = (state = initialState, action) => {
+export type initialStateType = typeof initialState
+const dialogReduser = (state = initialState, action:any):initialStateType => {
   switch (action.type) {
     case ADD_NEW_DIALOG:
       return{
@@ -54,7 +66,11 @@ const dialogReduser = (state = initialState, action) => {
       return state;
   }
 };
+type addDialogActionCreatorType={
+  type:typeof ADD_NEW_DIALOG,
+  newDialog:string
+}
 // если функция только возвращает значение то можно без return
-export const addDialogActionCreator = (newDialog) =>
- ({ type: ADD_NEW_DIALOG,newDialog});
+export const addDialogActionCreator = (newDialog:string):addDialogActionCreatorType =>
+({ type: ADD_NEW_DIALOG,newDialog});
 export default dialogReduser;

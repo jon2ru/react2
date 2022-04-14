@@ -4,20 +4,14 @@ import { loginApi, securityApi } from "../api/api";
 const SET_USER_DATA = "SET_USER_DATA";
 const GET_CAPCHA_URL_SUCCESS = "GET_CAPCHA_URL_SUCCESS"
 // ******************************
-export type initialStateType = {
-  id: number|null,
-  email:string|null,
-  login: string|null,
-  isAuth: boolean,
-  capchaUrl:string|null,
-};
-let initialState:initialStateType = {
-  id: null,
-  email: null,
-  login: null,
+let initialState = {
+  id: null as number|null,
+  email: null as string|null,
+  login: null as string|null,
   isAuth: false,
-  capchaUrl: null,
+  capchaUrl: null as string|null
 };
+export type initialStateType = typeof initialState
 //начальный state
 const authReduser = (state = initialState, action:any):initialStateType => {
   switch (action.type) {

@@ -4,17 +4,46 @@ const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const GET_STATUS = "GET_STATUS";
 const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS";
+type postType={
+  id:number, 
+  message: string,
+  count:number
+}
+type contactType={
+  github:string,
+  vk:string,
+  facebook:string,
+  instagram:string,
+  twitter:string,
+  website:string,
+  youtube:string,
+  mainLink:string
+}
+type photosType={
+  small:string|null,
+  large:string|null
+}
+type profileType={
+  userId:number, 
+  lookingForAJob: boolean,
+  lookingForAJobDescription:string,
+  fullName:string,
+  contacts:contactType,//это объект поэтому сделал выше type contactType
+  photos:photosType
+}
+export type initialStateType = typeof initialState
 let initialState = {
   post: [
     { id: 1, message: "Как дела", count: 2 },
     { id: 2, message: "нормально", count: 5 },
-  ],
+  ]as Array<postType>,
   //newPostText: "",
-  profile: null,
+  profile:null as profileType|null,
   status: "",
+  newPostText: ""
 };
 //начальный state
-const profileReduser = (state = initialState, action) => {
+const profileReduser = (state = initialState, action:any):initialStateType => {
   switch (action.type) {
     case ADD_POST:
       // скобка {} чтобы писать одну и ту же переменную
@@ -51,21 +80,37 @@ const profileReduser = (state = initialState, action) => {
       return state;
   }
 };
-export const addhhPostActionCreator = (newPostText) => ({ type: ADD_POST, newPostText });
-export const setUserProfile = (profile) => ({
+type addhhPostActionCreatorType={
+  type:typeof ADD_POST,
+   newPostText:string
+}
+export const addhhPostActionCreator = (newPostText:string):addhhPostActionCreatorType => ({ type: ADD_POST, newPostText });
+type setUserProfileAcType={
+  type:typeof SET_USER_PROFILE,
+  profile:profileType
+}
+export const setUserProfile = (profile:profileType):setUserProfileAcType => ({
   type: SET_USER_PROFILE,
   profile,
 });
-export const getuStatus = (status) => ({
+type getuStatusAcType={
+  type:typeof GET_STATUS,
+  status:string
+}
+export const getuStatus = (status:string):getuStatusAcType => ({
   type: GET_STATUS,
   status,
 });
-export const savePhotoSuccess = (photos) => ({
+type savePhotoSuccessAcType={
+  type:typeof SAVE_PHOTO_SUCCESS,
+  photos:string
+}
+export const savePhotoSuccess = (photos:string) => ({
   type: SAVE_PHOTO_SUCCESS,
   photos,
 });
 //thunk
-export const profilesData = (userIdd) => async(dispatch) =>{
+export const profilesData = (userIdd:number) => async(dispatch:any) =>{
   // return (dispatch) => {
    let response=await profileApi.getProfileApi(userIdd)
     // .then((response) => {
@@ -74,7 +119,7 @@ export const profilesData = (userIdd) => async(dispatch) =>{
   //   });
   // }
 }
-export const getStatus = (userIdd) =>async(dispatch) => {
+export const getStatus = (userIdd:number) =>async(dispatch:any) => {
   // return (dispatch) => {
     let response=await profileApi.getUserStatus(userIdd)
     // .then((response) => {
@@ -83,7 +128,7 @@ export const getStatus = (userIdd) =>async(dispatch) => {
   //   });
   // }
 }
-export const updateUserStatus = (status) =>async(dispatch) => {
+export const updateUserStatus = (status:any) =>async(dispatch:any) => {
   // return (dispatch) => {
     let response=await profileApi.updateStatus(status)
     // .then((response) => {
@@ -95,7 +140,7 @@ export const updateUserStatus = (status) =>async(dispatch) => {
   //   });
   // }
 }
-export const savePhoto = (file) =>async(dispatch) => {
+export const savePhoto = (file:any) =>async(dispatch:any) => {
   // return (dispatch) => {
     let response=await profileApi.savePhoto(file)
       //запрос в api.js 
@@ -103,7 +148,7 @@ export const savePhoto = (file) =>async(dispatch) => {
         dispatch(savePhotoSuccess(response.data.data.photos));
       }
 }
-export const saveProfile = (profile) =>async(dispatch,getState) => {
+export const saveProfile = (profile:any) =>async(dispatch:any,getState:any) => {
   const useruidi= getState().auth.id
   // getState достал значение из глобального стейта 
     let response=await profileApi.saveProfile(profile)
