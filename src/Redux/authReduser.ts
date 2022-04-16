@@ -19,8 +19,7 @@ const authReduser = (state = initialState, action:any):initialStateType => {
       case GET_CAPCHA_URL_SUCCESS:
       return {
         ...state,
-        ...action.data,
-        //isAuth: true,
+        ...action.data //,isAuth: true,
       };
     default:
       return state;

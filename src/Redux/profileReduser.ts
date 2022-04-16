@@ -1,36 +1,11 @@
 import { profileApi } from "../api/api";
 import { stopSubmit } from "redux-form";
+import { photosType, postType,profileType,contactType } from "../types/types";
 const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const GET_STATUS = "GET_STATUS";
 const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS";
-type postType={
-  id:number, 
-  message: string,
-  count:number
-}
-type contactType={
-  github:string,
-  vk:string,
-  facebook:string,
-  instagram:string,
-  twitter:string,
-  website:string,
-  youtube:string,
-  mainLink:string
-}
-type photosType={
-  small:string|null,
-  large:string|null
-}
-type profileType={
-  userId:number, 
-  lookingForAJob: boolean,
-  lookingForAJobDescription:string,
-  fullName:string,
-  contacts:contactType,//это объект поэтому сделал выше type contactType
-  photos:photosType
-}
+
 export type initialStateType = typeof initialState
 let initialState = {
   post: [
@@ -74,7 +49,7 @@ const profileReduser = (state = initialState, action:any):initialStateType => {
       return {
         ...state,
         profile: { ...state.profile,
-        photos: action.photos}
+        photos: action.photos}as profileType// после испаравить
       };
     default:
       return state;
@@ -103,9 +78,9 @@ export const getuStatus = (status:string):getuStatusAcType => ({
 });
 type savePhotoSuccessAcType={
   type:typeof SAVE_PHOTO_SUCCESS,
-  photos:string
+  photos:photosType
 }
-export const savePhotoSuccess = (photos:string) => ({
+export const savePhotoSuccess = (photos:photosType) => ({
   type: SAVE_PHOTO_SUCCESS,
   photos,
 });
@@ -128,7 +103,7 @@ export const getStatus = (userIdd:number) =>async(dispatch:any) => {
   //   });
   // }
 }
-export const updateUserStatus = (status:any) =>async(dispatch:any) => {
+export const updateUserStatus = (status:string) =>async(dispatch:any) => {
   // return (dispatch) => {
     let response=await profileApi.updateStatus(status)
     // .then((response) => {
@@ -148,7 +123,7 @@ export const savePhoto = (file:any) =>async(dispatch:any) => {
         dispatch(savePhotoSuccess(response.data.data.photos));
       }
 }
-export const saveProfile = (profile:any) =>async(dispatch:any,getState:any) => {
+export const saveProfile = (profile:profileType) =>async(dispatch:any,getState:any) => {
   const useruidi= getState().auth.id
   // getState достал значение из глобального стейта 
     let response=await profileApi.saveProfile(profile)

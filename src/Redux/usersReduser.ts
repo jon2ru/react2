@@ -1,4 +1,6 @@
 import { usersApi } from "../api/api";
+import { UserType} from "../types/types";
+
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
@@ -7,15 +9,17 @@ const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 const FOLLOWING_IS_FETCHING = "FOLLOWING_IS_FETCHING";
+
 let initialState = {
-  users: [],
+  users: []as Array<UserType>,
   pageSize: 10, //сколько показывать юзеров
   totalUsersCount: 0, //сколько всего юзеров
   currentPage: 1, // выделен жирным номер страницы
   isFetching: false,
-  followingInProgress: [],
+  followingInProgress: []as Array<number>,//массив user id
 };
-const usersReduser = (state = initialState, action) => {
+export type initialStateType = typeof initialState
+const usersReduser = (state = initialState, action:any):initialStateType => {
   switch (action.type) {
     case FOLLOW:
       return {
@@ -76,29 +80,54 @@ const usersReduser = (state = initialState, action) => {
       return state;
   }
 };
-export const followSuccess = (userId) => ({ type: FOLLOW, userId });
-export const unfollowSuccess = (userId) => ({ type: UNFOLLOW, userId });
-export const setusers = (users) => ({ type: SET_USERS, users });
-export const setcurrentpage = (currentPage) => ({
-  type: SET_CURRENT_PAGE,
-  currentPage,
+type followSuccessAcType={
+  type:typeof FOLLOW,
+ userId:number
+}
+export const followSuccess = (userId:number):followSuccessAcType => ({ type: FOLLOW, userId });
+type unfollowSuccessAcType={
+  type:typeof UNFOLLOW,
+ userId:number
+}
+export const unfollowSuccess = (userId:number):unfollowSuccessAcType => ({ type: UNFOLLOW, userId });
+type setusersAcType={
+  type:typeof SET_USERS,
+  users: Array<UserType>
+}
+export const setusers = (users:Array<UserType>):setusersAcType => ({ type: SET_USERS, users });
+type setcurrentpageAcType={
+  type:typeof SET_CURRENT_PAGE,
+  currentPage:number
+}
+export const setcurrentpage = (currentPage:number):setcurrentpageAcType => ({type: SET_CURRENT_PAGE,
+  currentPage
 });
-export const setTotalUsersCount = (totalUsersCount) => ({
-  type: SET_TOTAL_USERS_COUNT,
+type setTotalUsersCountActype={
+  type:typeof SET_TOTAL_USERS_COUNT,
+  count:number,
+}
+export const setTotalUsersCount = (totalUsersCount:number):setTotalUsersCountActype => ({type: SET_TOTAL_USERS_COUNT,
   count: totalUsersCount,
 });
-export const toggleIsFetching = (isFetching) => ({
-  type: TOGGLE_IS_FETCHING,
+type toggleIsFetchingActype={
+  type:typeof TOGGLE_IS_FETCHING,
+  isFetching:boolean
+}
+export const toggleIsFetching = (isFetching:boolean):toggleIsFetchingActype => ({type: TOGGLE_IS_FETCHING,
   isFetching,
 });
-export const toggleFollowInProgress = (isFetching, userId) => ({
-  type: FOLLOWING_IS_FETCHING,
+type toggleFollowInProgressActype={
+  type:typeof FOLLOWING_IS_FETCHING,
+  isFetching:boolean,
+  userId:number
+}
+export const toggleFollowInProgress = (isFetching:boolean, userId:number):toggleFollowInProgressActype => ({type: FOLLOWING_IS_FETCHING,
   isFetching,
-  userId,
+  userId
 });
 //Thunk внизу getUserThunkCreator
-export const getUserThunkCreator = (currentPage, pageSize) => {
-  return (dispatch) => {
+export const getUserThunkCreator = (currentPage:number, pageSize:number) => {
+  return (dispatch:any) => {
     dispatch(toggleIsFetching(true));
     //внизу выделяю жирным цифру страница users
     dispatch(setcurrentpage(currentPage));
@@ -106,7 +135,7 @@ export const getUserThunkCreator = (currentPage, pageSize) => {
       .getUsera(currentPage, pageSize)
       //запрос на сервер данные на api.js урок 63, 7:00
       //baseURL: "https://social-network.samuraijs.com/api/1.0/",
-      .then((data) => {
+      .then((data:any) => {
         // response в api.js поменял на data 63
         dispatch(toggleIsFetching(false));
         //выше крутилку убрал
@@ -118,13 +147,13 @@ export const getUserThunkCreator = (currentPage, pageSize) => {
 }; //End Thunk getUserThunkCreator
 //--------------------------
 //Thunk внизу follow
-export const follow = (userId) => {
-  return (dispatch) => {
+export const follow = (userId:number) => {
+  return (dispatch:any) => {
     dispatch(toggleFollowInProgress(true, userId));
     //включаю disabled кнопки
     usersApi.followApi(userId)
       // userApi  запрос delete из api.js
-      .then((response) => {
+      .then((response:any) => {
         if (response.data.resultCode === 0) {
           dispatch(followSuccess(userId));
           //записал значение в state
@@ -136,13 +165,13 @@ export const follow = (userId) => {
 }; //End Thunk follow
 //--------------------------
 //Thunk внизу unfollow
-export const unfollow = (userId) => {
-  return (dispatch) => {
+export const unfollow = (userId:number) => {
+  return (dispatch:any) => {
     dispatch(toggleFollowInProgress(true, userId));
     //включаю disabled кнопки
     usersApi.unfollowApi(userId)
       // userApi получаю запрос из api.js
-      .then((response) => {
+      .then((response:any) => {
         if (response.data.resultCode === 0) {
           dispatch(unfollowSuccess(userId));
           //записал значение в state
