@@ -17,7 +17,10 @@ let redusers = combineReducers({
   auth: authReduser,
   app: appReduser,
 });
+type RootReduserType=typeof redusers // получил глобальный стейт
+export type AppStateType=ReturnType<RootReduserType>// ReturnType-определи тип
 let store = createStore(redusers,applyMiddleware(thunk));
+// @ts-ignore
 window.store = store;
 //урок 59, 29:38
 export default store;

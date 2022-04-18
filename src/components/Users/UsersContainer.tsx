@@ -11,17 +11,9 @@ import {compose} from "redux";
 import { getCurrentPage, getFollowingInProgress, getIsFetching, 
   getPageSize, getTotalUsersCount, getUserSuperSelector
  } from "../../Redux/users-selectors";
-/* let mapStateToProps = (state) => {
-  return {
-    users: state.usersPage.users,
-    pageSize: state.usersPage.pageSize,
-    totalUsersCount: state.usersPage.totalUsersCount,
-    currentPage: state.usersPage.currentPage,
-    isFetching: state.usersPage.isFetching,
-    followingInProgress: state.usersPage.followingInProgress,
-    };
-}; */
-let mapStateToProps = (state) => {
+import { AppStateType } from "../../Redux/new-store";
+
+let mapStateToProps = (state:AppStateType) => {
   return {
     users: getUserSuperSelector(state),
     // users: getUsers(state),

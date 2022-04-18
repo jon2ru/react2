@@ -1,8 +1,22 @@
 import React from "react";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
+import { UserType } from "../../types/types";
 //import {usersApi}  from "../../api/api";
-class UsersApiContainer extends React.Component {
+type PropsType={
+  currentPage:number
+  pageSize:number
+  isFetching:boolean
+  totalUsersCount:number
+  users:Array<UserType>
+  follow:()=>void
+  unfollow:()=>void
+  onPageChanged:()=>void
+  followingInProgress:Array<number>
+
+  getUserThunkCreator:(currentPage:number,pageSize:number)=>void
+}
+class UsersApiContainer extends React.Component<PropsType> {
   componentDidMount() {
     this.props.getUserThunkCreator(this.props.currentPage, this.props.pageSize);
     /*this.props.toggleIsFetching(true);
@@ -17,7 +31,7 @@ class UsersApiContainer extends React.Component {
         //totalCount-на сервере число пользователей
       });*/
   } //END componentDidMount
-  onPageChanged = (pageNumber) => {
+  onPageChanged = (pageNumber:number) => {
     this.props.getUserThunkCreator(pageNumber, this.props.pageSize);
     /*
     this.props.setcurrentpage(pageNumber);
