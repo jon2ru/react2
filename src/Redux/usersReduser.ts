@@ -19,7 +19,9 @@ let initialState = {
   followingInProgress: []as Array<number>,//массив user id
 };
 export type initialStateType = typeof initialState
-const usersReduser = (state = initialState, action:any):initialStateType => {
+type ActionTypes=followSuccessAcType|unfollowSuccessAcType|setusersAcType|setcurrentpageAcType|
+setTotalUsersCountActype|toggleIsFetchingActype|toggleFollowInProgressActype
+const usersReduser = (state = initialState, action:ActionTypes):initialStateType => {
   switch (action.type) {
     case FOLLOW:
       return {

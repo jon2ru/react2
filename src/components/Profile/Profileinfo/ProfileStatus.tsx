@@ -1,12 +1,20 @@
 import classes from "./Profileinfo.module.css"
-import React from "react";
+import React, { ChangeEvent } from "react";
 //  отключен
 //  отключен
 //  отключен
 //  отключен
 //  отключен
 //  отключен
-class ProfileStatus extends React.Component {
+type PropsType={
+    status:string
+    updateUserStatus:(status:string)=>void
+}
+type StateType={
+    editMode:boolean
+    status:string
+}
+class ProfileStatus extends React.Component<PropsType,StateType> {
     state = {
         editMode: true,
         status: this.props.status
@@ -27,11 +35,12 @@ class ProfileStatus extends React.Component {
         //взял status из локального state
     };
     //урок 71 фокус
-    onStatusChange = (e) => {
+    onStatusChange = (e:ChangeEvent<HTMLInputElement>) => {
+        // ChangeEvent импортировал из react for TypeScript
         this.setState(
             { status: e.currentTarget.value });
     }
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps:PropsType, prevState:StateType) {
         if (prevProps.status !== this.props.status) {
             this.setState(
                 { status: this.props.status }

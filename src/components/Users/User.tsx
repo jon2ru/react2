@@ -1,10 +1,15 @@
-import React from "react";
+import React ,{FC}from "react";
 import styles from "./Users.module.css";
 import userPhoto from "../../assets/images/users.png";
 import { NavLink } from "react-router-dom";
 import Pagination from "../common/paginator/Pagination";
-
-let User = ({user,followingInProgress,follow,unfollow}) => {
+type PropsType={
+  user:any
+  followingInProgress:any
+  follow:(userId:number)=>void
+  unfollow:(userId:number)=>void
+}
+let User:React.FC<PropsType> = ({user,followingInProgress,follow,unfollow}) => {
   return (
         <div>
           <span>
@@ -19,7 +24,7 @@ let User = ({user,followingInProgress,follow,unfollow}) => {
             <div>
               {
                 user.followed ? (
-                    <button disabled={followingInProgress.some(id=>id===user.id)}
+                    <button disabled={followingInProgress.some((id:number)=>id===user.id)}
                     onClick={() => {
                       follow(user.id);
                       //вызываю thunk из редюсера, delete
@@ -27,7 +32,7 @@ let User = ({user,followingInProgress,follow,unfollow}) => {
                     >Follow
                   </button>
                 ) : (
-                  <button disabled={followingInProgress.some(id=>id===user.id)}
+                  <button disabled={followingInProgress.some((id:number)=>id===user.id)}
                     onClick={() => {
                     unfollow(user.id);
                       //вызываю thunk из редюсера

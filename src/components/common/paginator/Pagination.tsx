@@ -6,7 +6,7 @@ type PropsType={
   totalItemsCount:number
   pageSize:number
  currentPage:number
-  onPageChanged:()=>void //функция не возвращает ничего
+  onPageChanged:(pageNumber:number)=>void //функция не возвращает ничего
   portionSize? :number
 }
 

@@ -53,7 +53,8 @@ class App extends React.Component {
               {/* знак вопроса обозначает ,что может и не быть userId . это для withRouter */}
             </section>
           </Suspense>
-          <Route path="/users" render={() => <UsersContainer />} />
+          <Route path="/users" render={() => <UsersContainer pageTitle={'Samuray'}/>} />
+          {/* Samuray собственные пропсы */}
           <Route path="/login/" render={() => <QplOogin />} />
           <Route exact path="/" render={() => <Redirect from="/" to="/profile" />} />
           {/* <Route path="*" render={() => <div>404 NOT FOUND</div>} /> */}

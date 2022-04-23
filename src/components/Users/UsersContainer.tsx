@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import UsersApiContainer from "./UsersApiContainer";
+import UsersApiContainer, { MapdispatchPropsType, MapStatePropsType, ownPropsType } from "./UsersApiContainer";
 import {
   unfollow,
   follow,
@@ -13,7 +13,7 @@ import { getCurrentPage, getFollowingInProgress, getIsFetching,
  } from "../../Redux/users-selectors";
 import { AppStateType } from "../../Redux/new-store";
 
-let mapStateToProps = (state:AppStateType) => {
+let mapStateToProps = (state:AppStateType):MapStatePropsType => {
   return {
     users: getUserSuperSelector(state),
     // users: getUsers(state),
@@ -50,10 +50,11 @@ let mapStateToProps = (state:AppStateType) => {
 
  урок 58 убрал mapDispatchToProps*/
 const UsersContainer = compose(
-    connect(
-    mapStateToProps,{follow,unfollow,setcurrentpage,
-      toggleFollowInProgress,
+  // TStateProps = {}, TDispatchProps = {}, TOwnProps = {}, State = DefaultState
+    connect<MapStatePropsType,MapdispatchPropsType,ownPropsType,AppStateType>(
+    mapStateToProps,{follow,unfollow,
       getUserThunkCreator})
+      // toggleFollowInProgress,,setcurrentpage, удалил
 )(UsersApiContainer);
 export default UsersContainer;
 

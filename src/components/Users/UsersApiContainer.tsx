@@ -3,19 +3,25 @@ import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 import { UserType } from "../../types/types";
 //import {usersApi}  from "../../api/api";
-type PropsType={
+export type MapStatePropsType={
   currentPage:number
   pageSize:number
   isFetching:boolean
   totalUsersCount:number
-  users:Array<UserType>
-  follow:()=>void
-  unfollow:()=>void
-  onPageChanged:()=>void
-  followingInProgress:Array<number>
-
-  getUserThunkCreator:(currentPage:number,pageSize:number)=>void
+  users:UserType[]
+  followingInProgress: number[]
 }
+export type MapdispatchPropsType={
+  follow:(userId:number)=>void
+  unfollow:(userId:number)=>void
+  getUserThunkCreator:(currentPage:number,pageSize:number)=>void
+//   setcurrentpage:number
+// toggleFollowInProgress:any
+}
+export type ownPropsType={
+  pageTitle:string
+}
+type PropsType=MapStatePropsType&MapdispatchPropsType&ownPropsType
 class UsersApiContainer extends React.Component<PropsType> {
   componentDidMount() {
     this.props.getUserThunkCreator(this.props.currentPage, this.props.pageSize);
@@ -45,6 +51,7 @@ class UsersApiContainer extends React.Component<PropsType> {
   render() {
     return (
       <>
+      <h2>{this.props.pageTitle} </h2>
         {this.props.isFetching ? <Preloader /> : null}
 
         <Users
