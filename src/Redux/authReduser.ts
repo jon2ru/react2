@@ -1,5 +1,9 @@
+import { ResultCodeEnum, ResultCodeforCaptcha } from './../api/api';
+import { ThunkAction } from 'redux-thunk';
 import { stopSubmit } from "redux-form";
 import { loginApi, securityApi } from "../api/api";
+import { AppStateType } from './new-store';
+import { Dispatch } from 'redux';
 
 const SET_USER_DATA = "SET_USER_DATA";
 const GET_CAPCHA_URL_SUCCESS = "GET_CAPCHA_URL_SUCCESS"
@@ -10,7 +14,10 @@ let initialState = {
   login: null as string|null,
   isAuth: false,
   capchaUrl: null as string|null
-};
+};type DispatchType = Dispatch<ActionTypes>
+type ActionTypes=setAuthUserDataType|getCaptchaSuccessActionType
+type ThunkType = ThunkAction<Promise<void>
+  , AppStateType, unknown, ActionTypes>
 export type initialStateType = typeof initialState
 //начальный state
 const authReduser = (state = initialState, action:any):initialStateType => {
@@ -41,48 +48,48 @@ type getCaptchaSuccessActionType={
 }
 export const getCaptchaSuccess = (capchaUrl:string):getCaptchaSuccessActionType => ({ type: GET_CAPCHA_URL_SUCCESS, data: { capchaUrl } });
 // ******************
-export const getAuthDataUser = () => async (dispatch:any) => {
+export const getAuthDataUser = () => async (dispatch: DispatchType) => {
   // return (dispatch)=>{
-  let response = await loginApi.me()
+  let meData = await loginApi.me()
   // .then((response) => {
-  if (response.data.resultCode === 0) {
-    let { email, login, id } = response.data.data;
+  if (meData.resultCode === ResultCodeEnum.Success) {
+    let { email, login, id } = meData.data;
     dispatch(setAuthUserData(email, login, id, true));
   }
   // });
   // }
 }
-export const login = (email:string, password:string, rememberMe:boolean,captcha:any) => async (dispatch:any) => {
+export const login = (email:string, password:string, rememberMe:boolean,captcha:any):ThunkType => async (dispatch:any) => {
   //login с маленькой
   // return (dispatch)=>{
-  let response = await loginApi.login(email, password, rememberMe,captcha)
+  let LoginData = await loginApi.login(email, password, rememberMe,captcha)
   // .then((response) => {
-  if (response.data.resultCode === 0) {
+  if (LoginData.resultCode === ResultCodeEnum.Success) {
     dispatch(getAuthDataUser());
   }
   //79 ещё, если несколько раз неправильно введены пароль или email то:
   else {
-    if (response.data.resultCode === 10) {
+    if (LoginData.resultCode === ResultCodeforCaptcha.CaptchaIsRequired) {
       dispatch(captcha2());
     }
-    let message = response.data.messages.length > 0 ? response.data.messages[0] :
+    let message = LoginData.messages.length > 0 ? LoginData.messages[0] :
       "Неправильный логин или пароль";
     dispatch(stopSubmit("login", { _error: message }));
   }
 }
-export const logout = () => async (dispatch:any) => {
+export const logout = ():ThunkType => async (dispatch) => {
   //logout с маленькой
   // return (dispatch)=>{
   let response = await loginApi.logout()
   // .then((response) => {
-  if (response.data.resultCode === 0) {
+  if (response.data.resultCode === ResultCodeEnum.Success) {
     dispatch(setAuthUserData(null, null, null, false));
     //вылогинились и зачищаеи пароль почта id isAuth
   }
   //     });
   // }
 }
-export const captcha2 = () => async (dispatch:any) => {
+export const captcha2 = ():ThunkType => async (dispatch) => {
   let response = await securityApi.getCaptchaUrl()
   // .then((response) => {
   const capchaUrl = response.data.url

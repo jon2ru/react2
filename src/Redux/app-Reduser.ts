@@ -27,8 +27,7 @@ type initializedSuccessActionType={
 export const initializedSuccess = ():initializedSuccessActionType => ({ type: INITIALIZED_SUCCESS });
 export const initializeApp = () => {
   return (dispatch:any) => {
-    let promise = dispatch(getAuthDataUser());//dispatch возвращает что-то
-    // let promise = dispatch(что-то диспачу если ещё и внизу соберу все промисы());
+    let promise = dispatch(getAuthDataUser());
    Promise.all ([promise]).then(() => {
       dispatch(initializedSuccess())
     })

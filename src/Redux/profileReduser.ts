@@ -103,7 +103,7 @@ export const profilesData = (userIdd:number) => async(dispatch:DispatchType, get
   //   });
   // }
 }
-export const getStatus = (userIdd:number):ThunkType =>async(dispatch:DispatchType) => {
+export const getStatus = (userIdd:number):ThunkType =>async(dispatch) => {
   // return (dispatch) => {
     let response=await profileApi.getUserStatus(userIdd)
     // .then((response) => {
@@ -112,7 +112,7 @@ export const getStatus = (userIdd:number):ThunkType =>async(dispatch:DispatchTyp
   //   });
   // }
 }
-export const updateUserStatus = (status:string):ThunkType =>async(dispatch:DispatchType) => {
+export const updateUserStatus = (status:string):ThunkType =>async(dispatch) => {
   // return (dispatch) => {
     let response=await profileApi.updateStatus(status)
     // .then((response) => {
@@ -124,7 +124,7 @@ export const updateUserStatus = (status:string):ThunkType =>async(dispatch:Dispa
   //   });
   // }
 }
-export const savePhoto = (file:any):ThunkType =>async(dispatch:DispatchType) => {
+export const savePhoto = (file:any):ThunkType =>async(dispatch) => {
   // return (dispatch) => {
     let response=await profileApi.savePhoto(file)
       //запрос в api.js 
