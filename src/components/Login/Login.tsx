@@ -9,17 +9,18 @@ import styles from "../common/FormControls/FormControls.module.css";
 import { createField } from "../common/FormControls/FormControls";
 import { AppStateType } from "../../Redux/new-store";
 type LoginFormOwnProps={
-  capchaUrl:string
+  capchaUrl:string|null
 }
-const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType,LoginFormOwnProps>& LoginFormOwnProps > = ({ handleSubmit, error, capchaUrl }) => {
-  // убрал слово props
+const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType,LoginFormOwnProps>& LoginFormOwnProps > = 
+({ handleSubmit, error, capchaUrl }) => {
   return <form onSubmit={handleSubmit}>
-    {createField("Email", "email", [required], input,)}
-    {createField("Password", "password", [required], input, { type: "password" })}
-    {createField(null, "rememberMe", [], input, { type: "checkbox" }, "remember me")}
+    {createField<LoginFormValuesTypeKeys>("Email", "email", [required], input,)}
+    {createField<LoginFormValuesTypeKeys>("Password", "password", [required], input, { type: "password" })}
+    {createField<LoginFormValuesTypeKeys>(undefined, "rememberMe", [], input, { type: "checkbox" }, "remember me")}
+    {/*          <LoginFormValuesTypeKeys> описание ниже */}
     {/* ниже капча */}
     {capchaUrl && <img src={capchaUrl} />}
-    {capchaUrl && createField("Введите капчу", "captcha", [required], input, {})}
+    {capchaUrl && createField<LoginFormValuesTypeKeys>("Введите капчу", "captcha", [required], input, {})}
 
     {error && <div className={styles.formSummaryError}>
       {error}
@@ -46,6 +47,10 @@ type LoginFormValuesType = {
   rememberMe: boolean,
   captcha: string
 }
+type LoginFormValuesTypeKeys=Extract <keyof LoginFormValuesType,string>
+// LoginFormValuesType,string если строка то возьми ключи
+// получил ключи email,password,rememberMe,captcha и выше вставил их в createField<LoginFormValuesTypeKeys>
+// теперь если напишу другой ключ будет ошибка
 const Login2: React.FC<MapStateToPropsType & MapDispatchPropsType> = (props) => {
   const aonSubmit = (formData: LoginFormValuesType) => {
     //75 урок 32:00 formData значение из reduxForm->handleSubmit

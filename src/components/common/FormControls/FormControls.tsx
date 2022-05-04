@@ -1,12 +1,13 @@
+import { FieldValidatorType } from '../../../utils/validator/validators';
 import React from "react";
 import styles from "./FormControls.module.css";
-import { Field } from "redux-form";
-
-export const textarea = ({ input, meta, ...props }) => {
+import { Field, WrappedFieldMetaProps, WrappedFieldProps } from "redux-form";
+// type FormControlParamtype={
+//     meta:WrappedFieldMetaProps
+//         }
+export const textarea: React.FC<WrappedFieldProps> = ({ input, meta, ...props }) => {
     //это рестоператор.props содержит все кроме input и meta
-    /* let peremen="input"
-     if(props.dialogPages){
-      return peremen="textarea"
+    /* WrappedFieldProps взял внутри Field
      }*/
     const hasError = meta.touched && meta.error
     return (
@@ -14,10 +15,9 @@ export const textarea = ({ input, meta, ...props }) => {
             <div> <textarea {...input} {...props} /> </div>
             {hasError && <span>{meta.error} </span>}
         </div>
-
-    )
+ )
 }
-export const input = ({ input, meta, ...props }) => {
+export const input: React.FC<WrappedFieldProps> = ({ input, meta, ...props }) => {
     //это рестоператор.props содержит все кроме input и meta
     const hasError = meta.touched && meta.error
     return (
@@ -25,15 +25,18 @@ export const input = ({ input, meta, ...props }) => {
             <div> <input {...input} {...props} /> </div>
             {hasError && <span>{meta.error} </span>}
         </div>
-
-    )
+ )
 }
-export const createField = (placeholder, name, validators, component, 
-    props = {}, text = "") => (
-    <div> <Field placeholder={placeholder}
+export function createField<FormKeysType extends string>(placeholder: string | undefined,
+    // extends string чтобы  name не выдавала ошибку
+    name: FormKeysType,
+    validators: Array<FieldValidatorType>,
+    component: React.FC<WrappedFieldProps>,
+    props = {}, text = "") {
+    return <div> <Field placeholder={placeholder}
         name={name}
         validate={validators}
         component={component}
-        {...props} />{ text }
-    </div> 
-)
+        {...props} />{text}
+    </div>
+}
