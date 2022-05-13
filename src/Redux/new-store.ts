@@ -19,6 +19,12 @@ let redusers = combineReducers({
 });
 type RootReduserType=typeof redusers // получил глобальный стейт
 export type AppStateType=ReturnType<RootReduserType>// ReturnType-определи тип
+// ------------------------------
+// ниже вывод типа  для actionsCreators
+type PropertyesTypes<T> =T extends{[key:string]: infer U}?U:never
+// [key:string]---ключ: infer U----значение
+export type InferActionsTypes<T extends {[key:string]:(...arg:any[])=>any}>=ReturnType<PropertyesTypes<T>>
+// ----------------------------------
 let store = createStore(redusers,applyMiddleware(thunk));
 // @ts-ignore
 window.store = store;

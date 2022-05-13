@@ -3,8 +3,6 @@ import UsersApiContainer, { MapdispatchPropsType, MapStatePropsType, ownPropsTyp
 import {
   unfollow,
   follow,
-  setcurrentpage,
-  toggleFollowInProgress,
   getUserThunkCreator
 } from "../../Redux/usersReduser";
 import {compose} from "redux";
