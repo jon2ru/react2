@@ -1,8 +1,8 @@
 import { AppStateType, InferActionsTypes } from './new-store';
-import { usersApi } from "../api/api";
 import { UserType } from "../types/types";
 import { Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
+import { usersApi } from '../api/users-api';
 
 let initialState = {
   users: [] as Array<UserType>,
@@ -124,11 +124,11 @@ export const follow = (userId: number): ThunkType => {
   return async (dispatch) => {
     dispatch(actions.toggleFollowInProgress(true, userId));
     //включаю disabled кнопки
-    let response = await
+    let data = await
       usersApi.followApi(userId)
     // userApi  запрос delete из api.js
 
-    if (response.data.resultCode === 0) {
+    if (data.resultCode === 0) {
       dispatch(actions.followSuccess(userId));
       //записал значение в state
     }
@@ -143,10 +143,10 @@ export const unfollow = (userId: number): ThunkType => {
   return async (dispatch) => {
     dispatch(actions.toggleFollowInProgress(true, userId));
     //включаю disabled кнопки
-    let response = await
+    let data = await
       usersApi.unfollowApi(userId)
     // userApi получаю запрос из api.js
-    if (response.data.resultCode === 0) {
+    if (data.resultCode === 0) {
       dispatch(actions.unfollowSuccess(userId));
       //записал значение в state
     }

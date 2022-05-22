@@ -1,9 +1,10 @@
-import { ResultCodeEnum, ResultCodeforCaptcha } from './../api/api';
+import { ResultCodeEnum, ResultCodeforCaptchaEnum } from '../api/api';
 import { ThunkAction } from 'redux-thunk';
 import { stopSubmit } from "redux-form";
-import { loginApi, securityApi } from "../api/api";
 import { AppStateType } from './new-store';
 import { Dispatch } from 'redux';
+import { loginApi } from '../api/login-api';
+import { securityApi } from '../api/security-api';
 
 const SET_USER_DATA = "SET_USER_DATA";
 const GET_CAPCHA_URL_SUCCESS = "GET_CAPCHA_URL_SUCCESS"
@@ -48,12 +49,17 @@ type getCaptchaSuccessActionType={
 }
 export const getCaptchaSuccess = (capchaUrl:string):getCaptchaSuccessActionType => ({ type: GET_CAPCHA_URL_SUCCESS, data: { capchaUrl } });
 // ******************
+
 export const getAuthDataUser = () => async (dispatch: DispatchType) => {
   // return (dispatch)=>{
-  let meData = await loginApi.me()
+  let data = await loginApi.me()
   // .then((response) => {
-  if (meData.resultCode === ResultCodeEnum.Success) {
-    let { email, login, id } = meData.data;
+  if (data.resultCode === ResultCodeEnum.Success) {
+     let { email, login, id } = data.data;
+  //  let email=meData.data.data.email
+  //   let login=meData.data.data.login
+  //  let id=meData.data.data.id
+
     dispatch(setAuthUserData(email, login, id, true));
   }
   // });
@@ -69,7 +75,7 @@ export const login = (email:string, password:string, rememberMe:boolean,captcha:
   }
   //79 ещё, если несколько раз неправильно введены пароль или email то:
   else {
-    if (LoginData.resultCode === ResultCodeforCaptcha.CaptchaIsRequired) {
+    if (LoginData.resultCode === ResultCodeforCaptchaEnum.CaptchaIsRequired) {
       dispatch(captcha2());
     }
     let message = LoginData.messages.length > 0 ? LoginData.messages[0] :
@@ -90,9 +96,9 @@ export const logout = ():ThunkType => async (dispatch) => {
   // }
 }
 export const captcha2 = ():ThunkType => async (dispatch) => {
-  let response = await securityApi.getCaptchaUrl()
+  let data = await securityApi.getCaptchaUrl()
   // .then((response) => {
-  const capchaUrl = response.data.url
+  const capchaUrl =data.url
   //  нужно объявить в инициализации выше capchaUrl:null
   dispatch(getCaptchaSuccess(capchaUrl));
   //вызываю экшн кревтор
