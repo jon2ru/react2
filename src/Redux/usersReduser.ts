@@ -1,4 +1,4 @@
-import { AppStateType, InferActionsTypes } from './new-store';
+import { AppStateType, BaseThunkType, InferActionsTypes } from './new-store';
 import { UserType } from "../types/types";
 import { Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
@@ -95,8 +95,7 @@ toggleFollowInProgress : (isFetching: boolean, userId: number) => ({type: "FOLLO
 //Thunk внизу getUserThunkCreator
 type DispatchType = Dispatch<ActionTypes>
 type GetStateType = () => AppStateType
-type ThunkType = ThunkAction<Promise<void>
-  , AppStateType, unknown, ActionTypes>
+type ThunkType = BaseThunkType<ActionTypes>
 export const getUserThunkCreator = (currentPage: number, pageSize: number): ThunkType => {
   return async (dispatch, getState) => {
     // return (dispatch:DispatchType,getState:GetStateType) => {

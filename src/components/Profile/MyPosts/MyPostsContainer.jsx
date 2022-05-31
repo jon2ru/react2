@@ -1,6 +1,5 @@
 // console.log(MyPosts);
-import {
-  addhhPostActionCreator} from "../../../Redux/profileReduser";
+import {actions} from "../../../Redux/profileReduser";
 import MyPosts from "./MyPosts";
 import { connect } from "react-redux";
 
@@ -46,7 +45,7 @@ let mapStateToProps = (state) => {
 let mapDispatchToProps = (dispatch) => {
   return {
     addPost: (newPostText) => {
-      dispatch(addhhPostActionCreator(newPostText));
+      dispatch(actions.addhhPostActionCreator(newPostText));
     },
   };
 };
