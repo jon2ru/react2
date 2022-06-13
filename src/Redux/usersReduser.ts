@@ -11,8 +11,12 @@ let initialState = {
   currentPage: 1, // выделен жирным номер страницы
   isFetching: false,
   followingInProgress: [] as Array<number>,//массив user id
+  filter:{
+    term:''
+  }
 };
 export type initialStateType = typeof initialState
+export type filterType = typeof initialState.filter
 const usersReduser = (state = initialState, action: ActionTypes): initialStateType => {
   switch (action.type) {
     case "FOLLOW":
@@ -42,6 +46,11 @@ const usersReduser = (state = initialState, action: ActionTypes): initialStateTy
         }),
       };
 
+    case "SET_FILTER":
+      return {
+        ...state,
+        filter:action.payload,
+      };
     case "SET_USERS":
       return {
         ...state,
@@ -81,6 +90,7 @@ export const actions={
 unfollowSuccess : (userId: number) => ({ type: "UNFOLLOW", userId }as const),
 
 setusers : (users: Array<UserType>) => ({ type: "SET_USERS", users }as const),
+setFilter : (term:string) => ({ type: "SET_FILTER",payload:{term} }as const),
 
 setcurrentpage : (currentPage: number) => ({type: "SET_CURRENT_PAGE",currentPage}as const),
 setTotalUsersCount : (totalUsersCount: number) => ({type: "SET_TOTAL_USERS_COUNT",count: totalUsersCount,
@@ -96,15 +106,16 @@ toggleFollowInProgress : (isFetching: boolean, userId: number) => ({type: "FOLLO
 type DispatchType = Dispatch<ActionTypes>
 type GetStateType = () => AppStateType
 type ThunkType = BaseThunkType<ActionTypes>
-export const getUserThunkCreator = (currentPage: number, pageSize: number): ThunkType => {
+export const getUserThunkCreator = (currentPage: number, pageSize: number,term:string): ThunkType => {
   return async (dispatch, getState) => {
     // return (dispatch:DispatchType,getState:GetStateType) => {
     // выше 2 способа типизации thunk 1Й заккомменирован
     dispatch(actions.toggleIsFetching(true));
     //внизу выделяю жирным цифру страница users
     dispatch(actions.setcurrentpage(currentPage));
+    dispatch(actions.setFilter(term));
     let data = await usersApi
-      .getUsera(currentPage, pageSize)
+      .getUsera(currentPage, pageSize,term)
     //запрос на сервер данные на api.js урок 63, 7:00
     //baseURL: "https://social-network.samuraijs.com/api/1.0/",
     // .then((data:any) => {

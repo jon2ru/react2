@@ -7,7 +7,7 @@ import {
 } from "../../Redux/usersReduser";
 import {compose} from "redux";
 import { getCurrentPage, getFollowingInProgress, getIsFetching, 
-  getPageSize, getTotalUsersCount, getUserSuperSelector
+  getPageSize, getTotalUsersCount, getUserFilter, getUserSuperSelector
  } from "../../Redux/users-selectors";
 import { AppStateType } from "../../Redux/new-store";
 
@@ -20,6 +20,7 @@ let mapStateToProps = (state:AppStateType):MapStatePropsType => {
     currentPage: getCurrentPage(state),
     isFetching: getIsFetching(state),
     followingInProgress: getFollowingInProgress(state),
+    filter:getUserFilter(state)
     };
 };
 

@@ -57,5 +57,5 @@ let User:React.FC<PropsType> = ({user,followingInProgress,follow,unfollow}) => {
           </span>
         </div>
   );
-}; //end Users
+}; //end User
 export default User;

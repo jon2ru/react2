@@ -5,6 +5,7 @@ import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import NavContainer from "./components/Nav/NavContainer";
 // import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
+import Musik from "./components/Musik";
 // import ProfileContainer from "./components/Profile/ProfileContainer";
 import QplOogin from "./components/Login/Login";
 import { initializeApp } from "./Redux/app-Reduser";
@@ -49,6 +50,7 @@ class App extends React.Component {
           <Suspense fallback={<div>Загрузка...</div>}>
             <section>
               <Route path="/dialogs/" render={() => <DialogsContainer />} />
+              <Route path="/musik/" render={() => <Musik />} />
               <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
               {/* знак вопроса обозначает ,что может и не быть userId . это для withRouter */}
             </section>

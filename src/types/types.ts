@@ -1,3 +1,5 @@
+import { filterType } from "../Redux/usersReduser"
+
 export type postType={
     id:number, 
     message: string,
@@ -30,5 +32,6 @@ export type UserType={
     name:string
     status:string
     photos:photosType
+    filter:filterType
   }
   

@@ -2,6 +2,7 @@ import React from "react";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 import { UserType } from "../../types/types";
+import { filterType } from "../../Redux/usersReduser";
 //import {usersApi}  from "../../api/api";
 export type MapStatePropsType={
   currentPage:number
@@ -10,11 +11,12 @@ export type MapStatePropsType={
   totalUsersCount:number
   users:UserType[]
   followingInProgress: number[]
+  filter:filterType
 }
 export type MapdispatchPropsType={
   follow:(userId:number)=>void
   unfollow:(userId:number)=>void
-  getUserThunkCreator:(currentPage:number,pageSize:number)=>void
+  getUserThunkCreator:(currentPage:number,pageSize:number,term:string)=>void
 //   setcurrentpage:number
 // toggleFollowInProgress:any
 }
@@ -24,7 +26,7 @@ export type ownPropsType={
 type PropsType=MapStatePropsType&MapdispatchPropsType&ownPropsType
 class UsersApiContainer extends React.Component<PropsType> {
   componentDidMount() {
-    this.props.getUserThunkCreator(this.props.currentPage, this.props.pageSize);
+    this.props.getUserThunkCreator(this.props.currentPage, this.props.pageSize,'');
     /*this.props.toggleIsFetching(true);
     usersApi.getUsera(this.props.currentPage, this.props.pageSize)
   //запрос на сервер данные на api.js урок 63, 7:00
@@ -37,8 +39,8 @@ class UsersApiContainer extends React.Component<PropsType> {
         //totalCount-на сервере число пользователей
       });*/
   } //END componentDidMount
-  onPageChanged = (pageNumber:number) => {
-    this.props.getUserThunkCreator(pageNumber, this.props.pageSize);
+  onPageChanged = (PageNumber:number) => {
+    this.props.getUserThunkCreator(PageNumber, this.props.pageSize,this.props.filter.term);
     /*
     this.props.setcurrentpage(pageNumber);
     this.props.toggleIsFetching(true);
@@ -48,6 +50,9 @@ class UsersApiContainer extends React.Component<PropsType> {
      this.props.setusers(data.items);
     });*/
   }; // END onPageChanged
+  onFilterChanged=(filter:filterType)=>{
+    this.props.getUserThunkCreator(1, this.props.pageSize,filter.term);
+  }
   render() {
     return (
       <>
@@ -60,6 +65,7 @@ class UsersApiContainer extends React.Component<PropsType> {
           currentPage={this.props.currentPage}
           users={this.props.users}
           onPageChanged={this.onPageChanged}
+          onFilterChanged={this.onFilterChanged}
           follow={this.props.follow}
           unfollow={this.props.unfollow}
           followingInProgress={this.props.followingInProgress}
