@@ -1,14 +1,15 @@
 import { getItemsType, instance, ApiResponceType } from "./api";
 
 export const usersApi = {
-  getUsera(currentPage = 1, pageSize = 10,term:string='') {
+  getUsera(currentPage = 1, pageSize = 10,term:string='',friend:null|boolean=null) {
     return (
       instance
-        .get<getItemsType>(`users?page=${currentPage}&count=${pageSize}&term=${term}`)
+        .get<getItemsType>(`users?page=${currentPage}&count=${pageSize}&term=${term}`+(friend===null?'':`&friend=${friend}`))
         //запрос в userApiContainer
         //currentPage- выделен жирным номер страницы
         //pageSize: 10, -сколько показывать юзеров
         //term 
+        // friend
 
         .then((response) => {
           return response.data;

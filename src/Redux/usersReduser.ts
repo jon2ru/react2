@@ -12,7 +12,8 @@ let initialState = {
   isFetching: false,
   followingInProgress: [] as Array<number>,//массив user id
   filter:{
-    term:''
+    term:'',
+    friend:null as null|boolean
   }
 };
 export type initialStateType = typeof initialState
@@ -90,7 +91,7 @@ export const actions={
 unfollowSuccess : (userId: number) => ({ type: "UNFOLLOW", userId }as const),
 
 setusers : (users: Array<UserType>) => ({ type: "SET_USERS", users }as const),
-setFilter : (term:string) => ({ type: "SET_FILTER",payload:{term} }as const),
+setFilter : (filter:filterType) => ({ type: "SET_FILTER",payload:filter}as const),
 
 setcurrentpage : (currentPage: number) => ({type: "SET_CURRENT_PAGE",currentPage}as const),
 setTotalUsersCount : (totalUsersCount: number) => ({type: "SET_TOTAL_USERS_COUNT",count: totalUsersCount,
@@ -106,16 +107,16 @@ toggleFollowInProgress : (isFetching: boolean, userId: number) => ({type: "FOLLO
 type DispatchType = Dispatch<ActionTypes>
 type GetStateType = () => AppStateType
 type ThunkType = BaseThunkType<ActionTypes>
-export const getUserThunkCreator = (currentPage: number, pageSize: number,term:string): ThunkType => {
+export const getUserThunkCreator = (currentPage: number, pageSize: number,filter:filterType): ThunkType => {
   return async (dispatch, getState) => {
     // return (dispatch:DispatchType,getState:GetStateType) => {
     // выше 2 способа типизации thunk 1Й заккомменирован
     dispatch(actions.toggleIsFetching(true));
     //внизу выделяю жирным цифру страница users
     dispatch(actions.setcurrentpage(currentPage));
-    dispatch(actions.setFilter(term));
+    dispatch(actions.setFilter(filter));
     let data = await usersApi
-      .getUsera(currentPage, pageSize,term)
+      .getUsera(currentPage, pageSize,filter.term,filter.friend)
     //запрос на сервер данные на api.js урок 63, 7:00
     //baseURL: "https://social-network.samuraijs.com/api/1.0/",
     // .then((data:any) => {

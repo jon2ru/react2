@@ -16,7 +16,7 @@ export type MapStatePropsType={
 export type MapdispatchPropsType={
   follow:(userId:number)=>void
   unfollow:(userId:number)=>void
-  getUserThunkCreator:(currentPage:number,pageSize:number,term:string)=>void
+  getUserThunkCreator:(currentPage:number,pageSize:number,filter:filterType)=>void
 //   setcurrentpage:number
 // toggleFollowInProgress:any
 }
@@ -26,7 +26,8 @@ export type ownPropsType={
 type PropsType=MapStatePropsType&MapdispatchPropsType&ownPropsType
 class UsersApiContainer extends React.Component<PropsType> {
   componentDidMount() {
-    this.props.getUserThunkCreator(this.props.currentPage, this.props.pageSize,'');
+    const {currentPage,pageSize,filter}=this.props
+    this.props.getUserThunkCreator(currentPage,pageSize,filter);
     /*this.props.toggleIsFetching(true);
     usersApi.getUsera(this.props.currentPage, this.props.pageSize)
   //запрос на сервер данные на api.js урок 63, 7:00
@@ -40,7 +41,7 @@ class UsersApiContainer extends React.Component<PropsType> {
       });*/
   } //END componentDidMount
   onPageChanged = (PageNumber:number) => {
-    this.props.getUserThunkCreator(PageNumber, this.props.pageSize,this.props.filter.term);
+    this.props.getUserThunkCreator(PageNumber, this.props.pageSize,this.props.filter);
     /*
     this.props.setcurrentpage(pageNumber);
     this.props.toggleIsFetching(true);
@@ -51,7 +52,7 @@ class UsersApiContainer extends React.Component<PropsType> {
     });*/
   }; // END onPageChanged
   onFilterChanged=(filter:filterType)=>{
-    this.props.getUserThunkCreator(1, this.props.pageSize,filter.term);
+    this.props.getUserThunkCreator(1, this.props.pageSize,filter);
   }
   render() {
     return (
