@@ -1,5 +1,5 @@
-import React, { FC } from "react";
-import { connect } from "react-redux";
+import React from "react";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { InjectedFormProps, reduxForm } from "redux-form";
 import { required } from "../../utils/validator/validators";
 import { input } from "../common/FormControls/FormControls";
@@ -34,13 +34,7 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType,LoginFormOwnProp
 const LoginReduxForm = reduxForm<LoginFormValuesType,LoginFormOwnProps>({ form: "login" })(LoginForm);
 /*обворачиваем (хоком reduxForm) компоненту LoginForm
  и получаем контейнерную  компоненту LoginReduxForm */
-type MapStateToPropsType = {
-  isAuth: boolean,
-  capchaUrl: string | null
-}
-type MapDispatchPropsType = {
-  login: (email: string, password: string, rememberMe: boolean, captcha: string) => void
-}
+
 type LoginFormValuesType = {
   email: string,
   password: string,
@@ -51,10 +45,15 @@ type LoginFormValuesTypeKeys=Extract <keyof LoginFormValuesType,string>
 // LoginFormValuesType,string если строка то возьми ключи
 // получил ключи email,password,rememberMe,captcha и выше вставил их в createField<LoginFormValuesTypeKeys>
 // теперь если напишу другой ключ будет ошибка
-const Login2: React.FC<MapStateToPropsType & MapDispatchPropsType> = (props) => {
+export const Login2: React.FC = () => {
+  const capchaUrl=useSelector((state:AppStateType)=>state.auth.capchaUrl)
+  const isAuth=useSelector((state:AppStateType)=>state.auth.isAuth)
+
+  const dispatch = useDispatch()
+
   const aonSubmit = (formData: LoginFormValuesType) => {
     //75 урок 32:00 formData значение из reduxForm->handleSubmit
-    props.login(formData.email, formData.password, formData.rememberMe, formData.captcha);
+    dispatch(login(formData.email, formData.password, formData.rememberMe, formData.captcha));
     //login с маленькой
     //78 18:40 логинизация
     //console.log(formData);
@@ -70,17 +69,14 @@ const Login2: React.FC<MapStateToPropsType & MapDispatchPropsType> = (props) => 
       };
     };*/
   }
-  if (props.isAuth) {
+  if (isAuth) {
     return <Redirect to={'/profile'} />
   }
   return <div>
     <h1>LOGIN</h1>
-    <LoginReduxForm onSubmit={aonSubmit} capchaUrl={props.capchaUrl} />
+    <LoginReduxForm onSubmit={aonSubmit} capchaUrl={capchaUrl} />
   </div>
 };
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
-  isAuth: state.auth.isAuth,
-  capchaUrl: state.auth.capchaUrl
-})
-export default connect(mapStateToProps, { login })(Login2);
+
+export default connect(null, { login })(Login2);
 //login приходит из authReduser login с маленькой

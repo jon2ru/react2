@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
 import { AppStateType } from "./new-store";
 
-const getUsers = (state:AppStateType) => {
+export const getUsers = (state:AppStateType) => {
     return state.usersPage.users;
 }
 export const getIsFetching = (state:AppStateType) => {

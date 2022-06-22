@@ -6,8 +6,9 @@ import NavContainer from "./components/Nav/NavContainer";
 // import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import Musik from "./components/Musik";
+import {UsersPage} from "./components/Users/UsersApiContainer";
 // import ProfileContainer from "./components/Profile/ProfileContainer";
-import QplOogin from "./components/Login/Login";
+import Login2 from "./components/Login/Login";
 import { initializeApp } from "./Redux/app-Reduser";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -55,9 +56,9 @@ class App extends React.Component {
               {/* знак вопроса обозначает ,что может и не быть userId . это для withRouter */}
             </section>
           </Suspense>
-          <Route path="/users" render={() => <UsersContainer pageTitle={'Samuray'}/>} />
+          <Route path="/users" render={() => <UsersPage pageTitle={'Samuray'}/>} />
           {/* Samuray собственные пропсы */}
-          <Route path="/login/" render={() => <QplOogin />} />
+          <Route path="/login/" render={() => <Login2 />} />
           <Route exact path="/" render={() => <Redirect from="/" to="/profile" />} />
           {/* <Route path="*" render={() => <div>404 NOT FOUND</div>} /> */}
 
