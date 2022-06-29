@@ -131,7 +131,7 @@ export const getUserThunkCreator = (currentPage: number, pageSize: number,filter
 }; //End Thunk getUserThunkCreator
 //--------------------------
 //Thunk внизу follow
-export const follow = (userId: number): ThunkType => {
+export const follow1 = (userId: number): ThunkType => {
   return async (dispatch) => {
     dispatch(actions.toggleFollowInProgress(true, userId));
     //включаю disabled кнопки
@@ -150,7 +150,7 @@ export const follow = (userId: number): ThunkType => {
 }; //End Thunk follow
 //--------------------------
 //Thunk внизу unfollow
-export const unfollow = (userId: number): ThunkType => {
+export const unfollow1 = (userId: number): ThunkType => {
   return async (dispatch) => {
     dispatch(actions.toggleFollowInProgress(true, userId));
     //включаю disabled кнопки
