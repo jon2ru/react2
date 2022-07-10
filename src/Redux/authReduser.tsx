@@ -69,7 +69,7 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
     dispatch(stopSubmit("login", { _error: message }));
   }
 }
-export const logout = ():ThunkType => async (dispatch) => {
+export const logout1 = ():ThunkType => async (dispatch) => {
   //logout с маленькой
   // return (dispatch)=>{
   let response = await loginApi.logout()
