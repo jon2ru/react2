@@ -21,6 +21,10 @@ let initialState = {
 const authReduser = (state = initialState, action: ActionTypes): initialStateType => {
   switch (action.type) {
     case "SET_USER_DATA":
+      return {
+        ...state,
+        isAuth:action.data.isAuth //,isAuth: true,
+      };
     case "GET_CAPCHA_URL_SUCCESS":
       return {
         ...state,

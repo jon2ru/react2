@@ -28,14 +28,15 @@ const ChatPage = React.lazy(() => import('./pages/Chat/ChatPage'));
 const {Content, Footer, Sider } = Layout;
 export const items1 = ['1', '2', '3'].map((key) => ({
   key,
-  label: key==='1'?<NavLink to="/dialogs" activeClassName={classes.active}>
+  label: key==='1'?
+  <NavLink to="/dialogs" activeClassName={classes.active}>
   Dialogs
 </NavLink>:key==='2'?
   <NavLink to="/profile" activeClassName={classes.activeLink}>
   Profile
 </NavLink>:
 <NavLink to="/chat" activeClassName={classes.active}>
-          Chat
+  Chat
  </NavLink>,
 }));
 const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map((icon, index) => {
