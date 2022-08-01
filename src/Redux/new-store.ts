@@ -7,6 +7,7 @@ import authReduser from "./authReduser";
 import { reducer as formReducer } from 'redux-form';
 import thunk, { ThunkAction } from 'redux-thunk'
 import appReduser from "./app-Reduser";
+import chatReduser from "./chat-Reduser";
 
 let redusers = combineReducers({
   profilePage: profileReduser,
@@ -16,6 +17,7 @@ let redusers = combineReducers({
   form: formReducer,
   auth: authReduser,
   app: appReduser,
+  chat:chatReduser,
 });
 type RootReduserType=typeof redusers // получил глобальный стейт
 export type AppStateType=ReturnType<RootReduserType>// ReturnType-определи тип
